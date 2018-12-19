@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>  
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{35} - %msg %n</Pattern>
+            <charset>UTF-8</charset>  
+        </encoder>
+    </appender>
+
+    <appender name="LOG-DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{35} - %msg %n</Pattern>
+            <charset>UTF-8</charset>  
+        </encoder>
+        <file>logs/pom-socket-message-transfer.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+		    <!-- daily rollover -->
+		    <FileNamePattern>logs/pomSocketMessage-%d{yyyy-MM-dd}.log.gz</FileNamePattern> 
+		    <!-- keep 30 days worth of history -->
+            <maxHistory>30</maxHistory>
+		</rollingPolicy>
+        
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+              <level>DEBUG</level>
+        </filter>
+        <prudent>false</prudent>          
+    </appender>
+    <logger name="jp.co.avaya.calltolinegw" level="DEBUG"/>
+    <root level="INFO">
+        <appender-ref ref="LOG-DEBUG" />
+    </root>
+</configuration>
