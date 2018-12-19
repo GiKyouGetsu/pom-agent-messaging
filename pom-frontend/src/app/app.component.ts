@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {  FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
 import { StompService } from 'ng2-stomp-service';
+
+import { RxStompService} from '@stomp/ng2-stompjs';
+import { Message } from '@stomp/stompjs';
+import { Subscription } from 'rxjs';
 
 
 
@@ -15,6 +19,7 @@ const url_socket = "ws://loaclhost:9873/websocket-example"
 export class AppComponent implements OnInit {
   title = 'app';
 
+  sendName: string;
   public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'rec_data'});
 
   disableConnect: boolean = false;
@@ -34,6 +39,10 @@ export class AppComponent implements OnInit {
   // }
   ngOnInit() {
 
+    this.topicSubscription = this.rxStompService.watch('/topic/user').subscribe((message: Message) => {
+      console.log("recieved the message")
+      this.receivedMessages.push(message.body);
+    });
     // this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
     // this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
     //      console.log('ImageUpload:uploaded:', item, status, response);
@@ -56,4 +65,32 @@ export class AppComponent implements OnInit {
   //   }
   //   console.log('Disconnected');
   // }
+
+
+  public receivedMessages: string[] = [];
+  private topicSubscription: Subscription;
+
+  constructor(private rxStompService: RxStompService) { }
+
+
+
+  ngOnDestroy() {
+    this.topicSubscription.unsubscribe();
+  }
+
+  onSendMessage() {
+    const message = `Message generated at ${new Date}` + this.sendName;
+    console.log(message);
+    // this.rxStompService.publish({destination: '/app/user', body: message});
+  }
+
+  onDisconnect() {
+    console.log("onDisconnect");
+  }
+
+  onConnect() {
+    console.log("onConnect");
+  }
+
+
 }
