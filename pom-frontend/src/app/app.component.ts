@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {  FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
-import { StompService } from 'ng2-stomp-service';
+
+import {map} from 'rxjs/operators';
+import {RxStompState} from '@stomp/rx-stomp';
 
 import { RxStompService} from '@stomp/ng2-stompjs';
-import { Message } from '@stomp/stompjs';
-import { Subscription } from 'rxjs';
+import { Message, StompHeaders } from '@stomp/stompjs';
+import { Subscription, Observable } from 'rxjs';
 
 
 
@@ -19,6 +21,8 @@ const url_socket = "ws://loaclhost:9873/websocket-example"
 export class AppComponent implements OnInit {
   title = 'app';
 
+  onDisConnected=true;
+  onConnected = false;
   sendName: string;
   public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'rec_data'});
 
@@ -26,8 +30,10 @@ export class AppComponent implements OnInit {
   disabledDisconnect: boolean = true;
   canSendYourName: boolean = false;
 
+  public connectionStatus$: Observable<string>;
   private subscription : any;
 
+ 
   // constructor(public stompserveice: StompService) {
   //   this.stompserveice.configure({
   //     host: url_socket,
@@ -39,10 +45,7 @@ export class AppComponent implements OnInit {
   // }
   ngOnInit() {
 
-    this.topicSubscription = this.rxStompService.watch('/topic/user').subscribe((message: Message) => {
-      console.log("recieved the message")
-      this.receivedMessages.push(message.body);
-    });
+
     // this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
     // this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
     //      console.log('ImageUpload:uploaded:', item, status, response);
@@ -68,29 +71,63 @@ export class AppComponent implements OnInit {
 
 
   public receivedMessages: string[] = [];
+  public recieveFeekbakcMessage: string[]  = [];
   private topicSubscription: Subscription;
+  private topicSubscriptionFeedback: Subscription;
 
-  constructor(private rxStompService: RxStompService) { }
+  constructor(private rxStompService: RxStompService) { 
+    this.connectionStatus$ = rxStompService.connectionState$.pipe(map((state) => {
+      return RxStompState[state];
+    }));
+  }
 
 
+  clearMessage() {
+    this.receivedMessages = [];
+    this.recieveFeekbakcMessage = [];
+  }
 
   ngOnDestroy() {
     this.topicSubscription.unsubscribe();
   }
 
-  onSendMessage() {
-    const message = `Message generated at ${new Date}` + this.sendName;
-    console.log(message);
-    // this.rxStompService.publish({destination: '/app/user', body: message});
+  onSendMessage(sendname: string) {
+    const name = `Message generated at ${new Date}=>` + `send name: ` + sendname;
+    const param = {
+      name: name
+    }
+    console.log(name);
+    this.rxStompService.publish({destination: '/app/action', body: JSON.stringify(param)});
   }
 
   onDisconnect() {
+    this.topicSubscription.unsubscribe();
+    this.topicSubscriptionFeedback.unsubscribe();
+    this.onConnected = false;
+    this.onDisConnected = true;
     console.log("onDisconnect");
   }
 
   onConnect() {
     console.log("onConnect");
+    this.onConnected = true;
+    this.onDisConnected = false;
+    const headers = {user: "user'"};
+    this.topicSubscription = this.rxStompService.watch('/weixingyue' + '/topic/feedback').subscribe((message: Message) => {
+      console.log("recieved the message")
+
+      this.receivedMessages.push(JSON.parse(message.body));
+    },(err) => {
+      console.log("connect falied");
+      this.onConnected = true;
+      this.onDisConnected = false;  
+    });
+
+    this.topicSubscriptionFeedback = this.rxStompService.watch('/topic/feedback').subscribe((message: Message) => {
+      console.log("Recieved the feedback massage");
+      this.recieveFeekbakcMessage.push(JSON.parse(message.body));
+    }, (error => {
+      console.log("topic feedback subscribe failed");
+    }))
   }
-
-
 }

@@ -10,19 +10,21 @@ import { Subscription } from 'rxjs';
 })
 export class MessagesComponent implements OnInit, OnDestroy {
   public receivedMessages: string[] = [];
+  public sednMessage: string[] = [];
   private topicSubscription: Subscription;
 
   constructor(private rxStompService: RxStompService) { }
 
   ngOnInit() {
-    this.topicSubscription = this.rxStompService.watch('/topic/user').subscribe((message: Message) => {
-      console.log("recieved the message")
-      this.receivedMessages.push(message.body);
-    });
+    // this.topicSubscription = this.rxStompService.watch('/topic/user').subscribe((message: Message) => {
+    //   console.log("recieved the message")
+    //   this.receivedMessages.push(message.body);
+    // });
   }
 
   ngOnDestroy() {
-    this.topicSubscription.unsubscribe();
+    if (this.topicSubscription) 
+      this.topicSubscription.unsubscribe();
   }
 
   onSendMessage() {

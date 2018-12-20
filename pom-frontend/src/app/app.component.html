@@ -1,4 +1,3 @@
-
 <noscript>
   <h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
     enabled. Please enable
@@ -18,8 +17,8 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="connect">WebSocket connection:</label>
-        <button id="connect" class="btn btn-default" (click)="onConnect()" >Connect</button>
-        <button id="disconnect" class="btn btn-default" (click)="onDisconnect()" disabled="disabled">Disconnect
+        <button id="connect" class="btn btn-default" (click)="onConnect()" [disabled]="onConnected">Connect</button>
+        <button id="disconnect" class="btn btn-default" (click)="onDisconnect()" [disabled]="onDisConnected">Disconnect
         </button>
       </div>
     </div>
@@ -27,28 +26,53 @@
       <div class="form-inline">
         <div class="form-group">
           <label for="name">What is your name?</label>
-          <input type="text" id="name" ngModel="sendName" class="form-control" placeholder="Your name here...">
+          <input type="text" #sendName id="name" class="form-control" placeholder="Your name here...">
         </div>
-        <button id="send" (click)="onSendMessage()" class="btn btn-default">Send</button>
-    </div>
+        <button id="send" (click)="onSendMessage(sendName.value)" class="btn btn-default" [disabled]="onDisConnected">Send</button>
+        <button id="clearMessage" (click)="clearMessage()" class="btn btn-default" >clean</button>
+      </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
+
+
+    <div class="col-md-4">
       <table id="conversation" class="table table-striped">
         <thead>
           <tr>
-            <th>StockInfo</th>
+            <th>StockInfo Schedule</th>
+            
           </tr>
         </thead>
         <tbody id="userinfo">
+          <!-- we will use Angular binding to populate list of messages -->
+          <!-- <li *ngFor="let message of receivedMessages">
+                      <p>{{ message }}</p>
+                    </li> -->
+          <p *ngFor="let message of recieveFeekbakcMessage">
+            {{message.message}}
+          </p>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-8">
+      <table id="conversation" class="table table-striped">
+        <thead>
+          <tr>
+            <th>StockInfo Feedback</th>
+          </tr>
+        </thead>
+        <tbody id="userinfo">
+          <!-- we will use Angular binding to populate list of messages -->
+          <!-- <li *ngFor="let message of receivedMessages">
+                  <p>{{ message }}</p>
+                </li> -->
+          <p *ngFor="let message of receivedMessages">
+            {{message.message}}
+          </p>
         </tbody>
       </table>
     </div>
   </div>
 </div>
-
-
-
-
-<app-messages></app-messages>
