@@ -16,15 +16,15 @@ function connect() {
 
     var socket = new SockJS('/websocket-example');
     stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
+    stompClient.connect({login:'login'}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/user', function (greeting) {
             showGreeting(JSON.parse(greeting.body).message);
         });
-//        stompClient.subscribe('/topic/feedback', function (feedback) {
-//            showGreeting(JSON.parse(feedback.body).content);
-//        })
+        stompClient.subscribe('weixingyue'+'/topic/feedback', function (feedback) {
+            showGreeting(JSON.parse(feedback.body).content);
+        })
     });
 }
 

@@ -27,7 +27,7 @@
         </filter>
         <prudent>false</prudent>          
     </appender>
-    <logger name="jp.co.avaya.calltolinegw" level="DEBUG"/>
+    <!-- <logger name="jp.co.avaya.calltolinegw" level="DEBUG"/> -->
     <root level="INFO">
         <appender-ref ref="LOG-DEBUG" />
     </root>

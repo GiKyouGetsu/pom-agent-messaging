@@ -2,9 +2,9 @@ package com.avaya.ept;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 
-@SpringBootApplication
+
+@SpringBootApplication(scanBasePackages = "com.avaya.ept")
 public class PomSocketMessageTransferApplication {
 
 	public static void main(String[] args) {

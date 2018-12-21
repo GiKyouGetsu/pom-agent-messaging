@@ -2,7 +2,7 @@ import { InjectableRxStompConfig } from '@stomp/ng2-stompjs';
 
 export const myRxStompConfig: InjectableRxStompConfig = {
  // Which server?
- brokerURL: 'ws://127.0.0.1:9873/websocket-example?user=wei',
+ brokerURL: 'ws://127.0.0.1:9873/websocket/socketserver',
 //  brokerURL: '/websocket-example',
 
 //  // Headers

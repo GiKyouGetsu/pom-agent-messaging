@@ -1,0 +1,16 @@
+server:
+  port: 9873
+  
+####POM server config###
+pom:
+  server:
+    address: 10.135.9.45
+    port: 9970
+  cert:
+    path: wei
+    password: changedit
+    
+## log config ##
+logging:
+  config: config/logback-spring.xml
+

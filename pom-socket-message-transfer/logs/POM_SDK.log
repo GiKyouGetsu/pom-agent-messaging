@@ -1,0 +1,560 @@
+1 Dec 2018 17:13:20,387 [restartedMain] FINE   - InitPOMAgentFactory.init:72 - POMAgentFactory::init() - Starting ...
+21 Dec 2018 17:13:20,390 [restartedMain] FINE   - InitPOMAgentFactory.init:91 - POMAgentFactory::init() - Printing libUserAddress Map :
+21 Dec 2018 17:13:20,390 [restartedMain] FINE   - InitPOMAgentFactory.init:95 - POMAgentFactory::init() - libUserAddressMap[0] 10.135.9.45:9970
+21 Dec 2018 17:13:20,396 [restartedMain] FINEST  - IncomingPacketProcessor.<init>:20 - IncomingPacketProcessor::IncomingPacketProcessor
+21 Dec 2018 17:13:20,396 [restartedMain] FINEST  - IncomingPacketProcessor.runThread:32 - IncomingPacketProcessor::RunThread 
+21 Dec 2018 17:13:20,397 [restartedMain] FINE   - InitPOMAgentFactory.tryConnectingToPOM:459 - POMAgentFactory::tryConnectingToPOM() HARDCODING - sending Default as the hard coded value for zone name. Invoking connectToServer
+21 Dec 2018 17:13:20,403 [restartedMain] FINEST  - SocketClient.connectToServer:171 - SocketClient::connectToServer() exitFlag = true agentName = -1 exitIfCannotConnectFlag = true stopSocketClientThread = false
+21 Dec 2018 17:13:20,404 [restartedMain] FINEST  - SocketClient.connectToServer:223 - SocketClient::connectToServer() - Closed open streams and sslsocket.
+21 Dec 2018 17:13:20,404 [restartedMain] FINEST  - SocketClient.connectToServer:230 - Trying to connect to server : 10.135.9.45
+21 Dec 2018 17:13:21,627 [restartedMain] FINEST  - SocketClient.connectToServer:248 - Connect Successful.!!!
+21 Dec 2018 17:13:21,627 [restartedMain] FINE   - InitPOMAgentFactory.sendSDKStartedCmdToPAM:557 - POMAgentFactory::sendSDKStartedCmdToPAM()
+21 Dec 2018 17:13:21,627 [restartedMain] FINEST  - InitPOMAgentFactory.sendSDKStartedCmdToPAM:569 - POMAgentFactory::sendSDKStartedCmdToPAM() agentListString = 
+21 Dec 2018 17:13:21,627 [restartedMain] FINEST  - InitPOMAgentFactory.getExistingPOMAgent:1096 - getExistingPOMAgent
+21 Dec 2018 17:13:21,627 [restartedMain] FINEST  - InitPOMAgentFactory.getExistingPOMAgent:1137 - getExistingPOMAgent() - agent not found for -1
+21 Dec 2018 17:13:21,627 [restartedMain] FINEST  - InitPOMAgentFactory.sendSDKStartedCmdToPAM:578 - POMAgentFactory::sendSDKStartedCmdToPAM() created new InternalAgentHandler
+21 Dec 2018 17:13:21,629 [restartedMain] FINEST  - InitPOMAgentFactory.getPOMAgent:1036 - POMAgentFactory::getPOMAgent() - id: -1
+21 Dec 2018 17:13:21,630 [restartedMain] FINE   - POMAgent.AgentSDKConnected:1975 - POMAgent::AgentSDKConnected() - -1
+21 Dec 2018 17:13:21,631 [restartedMain] FINE   - POMAgent.AgentSDKConnected:1976 - POMAgent::AgentSDKConnected() - setting sockClient for internal agent = -1
+21 Dec 2018 17:13:21,631 [restartedMain] FINEST  - POMAgent.AgentSDKConnected:1980 - POMAgent::AgentSDKConnected() - Got lock ...
+21 Dec 2018 17:13:21,632 [restartedMain] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:13:21,632 [restartedMain] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - AgentSDKConnected
+21 Dec 2018 17:13:21,632 [restartedMain] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@7ec79e45
+21 Dec 2018 17:13:21,633 [restartedMain] FINEST  - SocketClient.runThread:96 - SocketClient::RunThread() creating new thread.
+21 Dec 2018 17:13:21,633 [restartedMain] FINEST  - InitPOMAgentFactory.getExistingPOMAgent:1096 - getExistingPOMAgent
+21 Dec 2018 17:13:21,633 [restartedMain] FINEST  - InitPOMAgentFactory.getExistingPOMAgent:1135 - getExistingPOMAgent() - Sending agent -1
+21 Dec 2018 17:13:21,642 [restartedMain] FINE   - InitPOMAgentFactory.init:283 - POMAgentFactory::init() DONE
+21 Dec 2018 17:13:21,642 [KeepSocketAliveThread54] FINEST  - InitPOMAgentFactory$1.run:136 - POMAgentFactory::KeepClientSocketAliveThread() - Started ...
+21 Dec 2018 17:13:21,644 [TryConnectingToPOMThread55] FINE   - InitPOMAgentFactory$2.run:232 - POMAgentFactory::TryConnectingToPOMThread() TryConnectingToPOMThread starting ....
+21 Dec 2018 17:13:21,687 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:13:21,687 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:13:21,690 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : AgentSDKConnected             C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:13:21,910 [SocketClient-50] FINEST  - SocketClient.run:561 - SocketClient::ProcessThread() bytesRead from socket - (10.135.9.45:9970) packet - [65, 103, 101, 110, 116, 83, 68, 75, 67, 111, 110, 110, 101, 99, 116, 101, 100, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 82, 45, 49, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 52, 56, 57, 32, 32, 32, 32, 32, 49, 32, 32, 32, 48, 32, 32, 32, 32, 49, 52, 32, 32, 32, 32, 32, 32, 83, 101, 115, 115, 105, 111, 110, 73, 68, 61, 78, 85, 76, 76, 3] size = 101
+21 Dec 2018 17:13:21,911 [SocketClient-50] FINEST  - IncomingPacketProcessor.addPacketToQueue:67 - IncomingPacketProcessor::addPacketToQueue
+21 Dec 2018 17:13:21,912 [Thread-12] FINEST  - SocketUtil.processPacketReceived:250 - SocketUtil::processPacketReceived() 
+******************************************************************************************
+ POM_METRICS CLIENT : Received header = AgentSDKConnected             R-1                            489     0    packet = AgentSDKConnected             R-1                            489     0   0     params = SessionID=NULL
+******************************************************************************************
+21 Dec 2018 17:13:21,913 [AgentEventListener53] FINEST  - AgentEventListener.processEvent:185 - AgentEventListener::processEvent() receiverQ size = 1
+21 Dec 2018 17:13:21,913 [AgentEventListener53] FINEST  - AgentEventListener.processEvent:194 - AgentEventListener::processEvent() socketFeedback header = AgentSDKConnected:R:489 packet = AgentSDKConnected             R-1                            489     0   0     params = SessionID=NULL
+21 Dec 2018 17:13:21,913 [AgentEventListener53] FINEST  - AgentEventListener.processSocketFeedback:236 - AgentEventListener::processSocketFeedback() Fri Dec 21 17:13:21 CST 2018RECEIVED FROM PAM: AgentSDKConnected WITH ID:489
+21 Dec 2018 17:13:21,921 [AgentEventListener53] FINEST  - InitPOMAgentFactory.checkOrCreateLockForAgent:1402 - POMAgentFactory::checkOrCreateLockForAgent() Creating lock for -1 at Fri Dec 21 17:13:21 CST 2018 TID (53)
+21 Dec 2018 17:13:21,922 [pool-1-thread-1] FINEST  - InitPOMAgentFactory.getLock:1386 - POMAgentFactory::getLock() Lock found for -1 at Fri Dec 21 17:13:21 CST 2018 TID (57)
+21 Dec 2018 17:13:21,923 [pool-1-thread-1] FINEST  - AgentFeedbackExecutor.run:61 - AgentFeedbackExecutor::run() Trying to lock for -1
+21 Dec 2018 17:13:21,923 [pool-1-thread-1] FINEST  - AgentFeedbackExecutor.run:70 - AgentFeedbackExecutor::run() Got lock for -1 for AgentSDKConnectedRESP
+21 Dec 2018 17:13:21,923 [POMSDKAgentFeedbackExecutor--1-57] FINEST  - AgentFeedbackExecutor.invoke:196 - DONE INVOKE FOR : class com.avaya.sdk.Internal.InternalPOMAgentHandler WITH ID:489
+21 Dec 2018 17:13:21,923 [POMSDKAgentFeedbackExecutor--1-57] FINEST  - InitPOMAgentFactory.removeIfLockDone:1424 - POMAgentFactory::removeIfLockDone() Lock unlocked for -1 at Fri Dec 21 17:13:21 CST 2018 TID (57)
+21 Dec 2018 17:13:21,924 [POMSDKAgentFeedbackExecutor--1-57] FINEST  - InitPOMAgentFactory.removeIfLockDone:1429 - POMAgentFactory::removeIfLockDone() Removed lock for -1 at Fri Dec 21 17:13:21 CST 2018 TID (57)
+21 Dec 2018 17:13:21,924 [POMSDKAgentFeedbackExecutor--1-57] FINEST  - AgentFeedbackExecutor.run:97 - AgentFeedbackExecutor::run() Task done for -1 for AgentSDKConnectedRESP
+21 Dec 2018 17:13:51,646 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:13:51,646 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:13:51,646 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@5ea0903a
+21 Dec 2018 17:13:51,665 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:13:51,665 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:13:51,665 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:14:21,647 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:14:21,647 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:14:21,647 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@5a9f1f36
+21 Dec 2018 17:14:21,674 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:14:21,674 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:14:21,674 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:14:51,647 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:14:51,647 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:14:51,647 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@1f9d9a01
+21 Dec 2018 17:14:51,668 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:14:51,668 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:14:51,668 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:15:21,648 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:15:21,648 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:15:21,648 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@74b318f0
+21 Dec 2018 17:15:21,677 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:15:21,677 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:15:21,677 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:15:51,648 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:15:51,648 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:15:51,648 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@2ec8671c
+21 Dec 2018 17:15:51,678 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:15:51,678 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:15:51,678 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:16:21,649 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:16:21,649 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:16:21,649 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@c0cbb5c
+21 Dec 2018 17:16:21,662 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:16:21,662 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:16:21,662 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:16:51,649 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:16:51,649 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:16:51,649 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@7fb2654e
+21 Dec 2018 17:16:51,676 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:16:51,676 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:16:51,676 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:17:21,650 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:17:21,650 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:17:21,650 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@13aa96d0
+21 Dec 2018 17:17:21,694 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:17:21,694 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:17:21,694 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:17:51,650 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:17:51,650 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:17:51,650 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@7eb7f33e
+21 Dec 2018 17:17:51,684 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:17:51,684 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:17:51,684 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:18:21,651 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:18:21,651 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:18:21,652 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@170871ef
+21 Dec 2018 17:18:21,685 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:18:21,685 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:18:21,685 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:18:51,652 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:18:51,652 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:18:51,652 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@7bfcfe55
+21 Dec 2018 17:18:51,680 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:18:51,680 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:18:51,680 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:19:21,654 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:19:21,654 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:19:21,654 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@3c27fbec
+21 Dec 2018 17:19:21,702 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:19:21,702 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:19:21,702 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:19:51,654 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:19:51,654 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:19:51,654 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@7dc8c155
+21 Dec 2018 17:19:51,672 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:19:51,672 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:19:51,672 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:20:21,655 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:20:21,655 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:20:21,655 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@291b400a
+21 Dec 2018 17:20:21,657 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:20:21,657 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:20:21,657 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:20:51,655 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:20:51,655 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:20:51,655 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@35891d2a
+21 Dec 2018 17:20:51,657 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:20:51,657 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:20:51,657 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:21:21,656 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:21:21,656 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:21:21,656 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@36f268ec
+21 Dec 2018 17:21:21,706 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:21:21,706 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:21:21,706 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:21:51,656 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:21:51,656 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:21:51,656 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@d0bc50e
+21 Dec 2018 17:21:51,677 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:21:51,677 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:21:51,677 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:22:21,657 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:22:21,657 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:22:21,658 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@7ee3cfb5
+21 Dec 2018 17:22:21,667 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:22:21,667 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:22:21,667 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:23:05,777 [restartedMain] FINE   - InitPOMAgentFactory.init:72 - POMAgentFactory::init() - Starting ...
+21 Dec 2018 17:23:05,780 [restartedMain] FINE   - InitPOMAgentFactory.init:91 - POMAgentFactory::init() - Printing libUserAddress Map :
+21 Dec 2018 17:23:05,780 [restartedMain] FINE   - InitPOMAgentFactory.init:95 - POMAgentFactory::init() - libUserAddressMap[0] 10.135.9.45:9970
+21 Dec 2018 17:23:05,787 [restartedMain] FINE   - InitPOMAgentFactory.tryConnectingToPOM:459 - POMAgentFactory::tryConnectingToPOM() HARDCODING - sending Default as the hard coded value for zone name. Invoking connectToServer
+21 Dec 2018 17:23:07,102 [restartedMain] FINE   - InitPOMAgentFactory.sendSDKStartedCmdToPAM:557 - POMAgentFactory::sendSDKStartedCmdToPAM()
+21 Dec 2018 17:23:07,106 [restartedMain] FINE   - POMAgent.AgentSDKConnected:1975 - POMAgent::AgentSDKConnected() - -1
+21 Dec 2018 17:23:07,106 [restartedMain] FINE   - POMAgent.AgentSDKConnected:1976 - POMAgent::AgentSDKConnected() - setting sockClient for internal agent = -1
+21 Dec 2018 17:23:07,118 [restartedMain] FINE   - InitPOMAgentFactory.init:283 - POMAgentFactory::init() DONE
+21 Dec 2018 17:23:07,121 [TryConnectingToPOMThread55] FINE   - InitPOMAgentFactory$2.run:232 - POMAgentFactory::TryConnectingToPOMThread() TryConnectingToPOMThread starting ....
+21 Dec 2018 17:26:21,752 [restartedMain] FINE   - InitPOMAgentFactory.init:72 - POMAgentFactory::init() - Starting ...
+21 Dec 2018 17:26:21,756 [restartedMain] FINE   - InitPOMAgentFactory.init:91 - POMAgentFactory::init() - Printing libUserAddress Map :
+21 Dec 2018 17:26:21,756 [restartedMain] FINE   - InitPOMAgentFactory.init:95 - POMAgentFactory::init() - libUserAddressMap[0] 10.135.9.45:9970
+21 Dec 2018 17:26:21,761 [restartedMain] FINE   - InitPOMAgentFactory.tryConnectingToPOM:459 - POMAgentFactory::tryConnectingToPOM() HARDCODING - sending Default as the hard coded value for zone name. Invoking connectToServer
+21 Dec 2018 17:26:23,077 [restartedMain] FINE   - InitPOMAgentFactory.sendSDKStartedCmdToPAM:557 - POMAgentFactory::sendSDKStartedCmdToPAM()
+21 Dec 2018 17:26:23,081 [restartedMain] FINE   - POMAgent.AgentSDKConnected:1975 - POMAgent::AgentSDKConnected() - -1
+21 Dec 2018 17:26:23,081 [restartedMain] FINE   - POMAgent.AgentSDKConnected:1976 - POMAgent::AgentSDKConnected() - setting sockClient for internal agent = -1
+21 Dec 2018 17:26:23,094 [restartedMain] FINE   - InitPOMAgentFactory.init:283 - POMAgentFactory::init() DONE
+21 Dec 2018 17:26:23,097 [TryConnectingToPOMThread55] FINE   - InitPOMAgentFactory$2.run:232 - POMAgentFactory::TryConnectingToPOMThread() TryConnectingToPOMThread starting ....
+21 Dec 2018 17:30:34,691 [restartedMain] FINE   - InitPOMAgentFactory.init:72 - POMAgentFactory::init() - Starting ...
+21 Dec 2018 17:30:34,693 [restartedMain] FINE   - InitPOMAgentFactory.init:91 - POMAgentFactory::init() - Printing libUserAddress Map :
+21 Dec 2018 17:30:34,694 [restartedMain] FINE   - InitPOMAgentFactory.init:95 - POMAgentFactory::init() - libUserAddressMap[0] 10.135.9.45:9970
+21 Dec 2018 17:30:34,696 [restartedMain] FINE   - InitPOMAgentFactory.tryConnectingToPOM:459 - POMAgentFactory::tryConnectingToPOM() HARDCODING - sending Default as the hard coded value for zone name. Invoking connectToServer
+21 Dec 2018 17:30:36,010 [restartedMain] FINE   - InitPOMAgentFactory.sendSDKStartedCmdToPAM:557 - POMAgentFactory::sendSDKStartedCmdToPAM()
+21 Dec 2018 17:30:36,014 [restartedMain] FINE   - POMAgent.AgentSDKConnected:1975 - POMAgent::AgentSDKConnected() - -1
+21 Dec 2018 17:30:36,015 [restartedMain] FINE   - POMAgent.AgentSDKConnected:1976 - POMAgent::AgentSDKConnected() - setting sockClient for internal agent = -1
+21 Dec 2018 17:30:36,030 [restartedMain] FINE   - InitPOMAgentFactory.init:283 - POMAgentFactory::init() DONE
+21 Dec 2018 17:30:36,036 [TryConnectingToPOMThread55] FINE   - InitPOMAgentFactory$2.run:232 - POMAgentFactory::TryConnectingToPOMThread() TryConnectingToPOMThread starting ....
+21 Dec 2018 17:38:20,860 [restartedMain] FINE   - InitPOMAgentFactory.init:72 - POMAgentFactory::init() - Starting ...
+21 Dec 2018 17:38:20,863 [restartedMain] FINE   - InitPOMAgentFactory.init:91 - POMAgentFactory::init() - Printing libUserAddress Map :
+21 Dec 2018 17:38:20,863 [restartedMain] FINE   - InitPOMAgentFactory.init:95 - POMAgentFactory::init() - libUserAddressMap[0] 10.135.9.45:9970
+21 Dec 2018 17:38:20,865 [restartedMain] FINE   - InitPOMAgentFactory.tryConnectingToPOM:459 - POMAgentFactory::tryConnectingToPOM() HARDCODING - sending Default as the hard coded value for zone name. Invoking connectToServer
+21 Dec 2018 17:38:22,110 [restartedMain] FINE   - InitPOMAgentFactory.sendSDKStartedCmdToPAM:557 - POMAgentFactory::sendSDKStartedCmdToPAM()
+21 Dec 2018 17:38:22,114 [restartedMain] FINE   - POMAgent.AgentSDKConnected:1975 - POMAgent::AgentSDKConnected() - -1
+21 Dec 2018 17:38:22,114 [restartedMain] FINE   - POMAgent.AgentSDKConnected:1976 - POMAgent::AgentSDKConnected() - setting sockClient for internal agent = -1
+21 Dec 2018 17:38:22,127 [restartedMain] FINE   - InitPOMAgentFactory.init:283 - POMAgentFactory::init() DONE
+21 Dec 2018 17:38:22,140 [TryConnectingToPOMThread55] FINE   - InitPOMAgentFactory$2.run:232 - POMAgentFactory::TryConnectingToPOMThread() TryConnectingToPOMThread starting ....
+21 Dec 2018 17:39:11,907 [restartedMain] FINE   - InitPOMAgentFactory.init:72 - POMAgentFactory::init() - Starting ...
+21 Dec 2018 17:39:11,908 [restartedMain] FINE   - InitPOMAgentFactory.init:287 - POMAgentFactory::init() ALREADY DONE.
+21 Dec 2018 17:39:35,746 [restartedMain] FINE   - InitPOMAgentFactory.init:72 - POMAgentFactory::init() - Starting ...
+21 Dec 2018 17:39:35,747 [restartedMain] FINE   - InitPOMAgentFactory.init:287 - POMAgentFactory::init() ALREADY DONE.
+21 Dec 2018 17:40:08,629 [restartedMain] FINE   - InitPOMAgentFactory.init:72 - POMAgentFactory::init() - Starting ...
+21 Dec 2018 17:40:08,629 [restartedMain] FINE   - InitPOMAgentFactory.init:287 - POMAgentFactory::init() ALREADY DONE.
+21 Dec 2018 17:46:22,189 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:46:22,190 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:46:22,190 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@5ae656cd
+21 Dec 2018 17:46:22,234 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:46:22,234 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:46:22,234 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:46:52,191 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:46:52,191 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:46:52,191 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@28373dcf
+21 Dec 2018 17:46:52,222 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:46:52,222 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:46:52,222 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:47:22,191 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:47:22,191 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:47:22,191 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@383b6d7d
+21 Dec 2018 17:47:22,236 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:47:22,236 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:47:22,236 [SocketClientSender-52] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:47:51,084 [restartedMain] FINE   - InitPOMAgentFactory.init:72 - POMAgentFactory::init() - Starting ...
+21 Dec 2018 17:47:51,087 [restartedMain] FINE   - InitPOMAgentFactory.init:91 - POMAgentFactory::init() - Printing libUserAddress Map :
+21 Dec 2018 17:47:51,087 [restartedMain] FINE   - InitPOMAgentFactory.init:95 - POMAgentFactory::init() - libUserAddressMap[0] 10.135.9.45:9970
+21 Dec 2018 17:47:51,089 [restartedMain] FINEST  - IncomingPacketProcessor.<init>:20 - IncomingPacketProcessor::IncomingPacketProcessor
+21 Dec 2018 17:47:51,089 [restartedMain] FINEST  - IncomingPacketProcessor.runThread:32 - IncomingPacketProcessor::RunThread 
+21 Dec 2018 17:47:51,089 [restartedMain] FINE   - InitPOMAgentFactory.tryConnectingToPOM:459 - POMAgentFactory::tryConnectingToPOM() HARDCODING - sending Default as the hard coded value for zone name. Invoking connectToServer
+21 Dec 2018 17:47:51,089 [restartedMain] FINEST  - SocketClient.connectToServer:171 - SocketClient::connectToServer() exitFlag = true agentName = -1 exitIfCannotConnectFlag = true stopSocketClientThread = false
+21 Dec 2018 17:47:51,090 [restartedMain] FINEST  - SocketClient.connectToServer:223 - SocketClient::connectToServer() - Closed open streams and sslsocket.
+21 Dec 2018 17:47:51,090 [restartedMain] FINEST  - SocketClient.connectToServer:230 - Trying to connect to server : 10.135.9.45
+21 Dec 2018 17:47:52,427 [restartedMain] FINEST  - SocketClient.connectToServer:248 - Connect Successful.!!!
+21 Dec 2018 17:47:52,427 [restartedMain] FINE   - InitPOMAgentFactory.sendSDKStartedCmdToPAM:557 - POMAgentFactory::sendSDKStartedCmdToPAM()
+21 Dec 2018 17:47:52,427 [restartedMain] FINEST  - InitPOMAgentFactory.sendSDKStartedCmdToPAM:569 - POMAgentFactory::sendSDKStartedCmdToPAM() agentListString = 
+21 Dec 2018 17:47:52,427 [restartedMain] FINEST  - InitPOMAgentFactory.getExistingPOMAgent:1096 - getExistingPOMAgent
+21 Dec 2018 17:47:52,427 [restartedMain] FINEST  - InitPOMAgentFactory.getExistingPOMAgent:1137 - getExistingPOMAgent() - agent not found for -1
+21 Dec 2018 17:47:52,427 [restartedMain] FINEST  - InitPOMAgentFactory.sendSDKStartedCmdToPAM:578 - POMAgentFactory::sendSDKStartedCmdToPAM() created new InternalAgentHandler
+21 Dec 2018 17:47:52,430 [restartedMain] FINEST  - InitPOMAgentFactory.getPOMAgent:1036 - POMAgentFactory::getPOMAgent() - id: -1
+21 Dec 2018 17:47:52,432 [restartedMain] FINE   - POMAgent.AgentSDKConnected:1975 - POMAgent::AgentSDKConnected() - -1
+21 Dec 2018 17:47:52,433 [restartedMain] FINE   - POMAgent.AgentSDKConnected:1976 - POMAgent::AgentSDKConnected() - setting sockClient for internal agent = -1
+21 Dec 2018 17:47:52,433 [restartedMain] FINEST  - POMAgent.AgentSDKConnected:1980 - POMAgent::AgentSDKConnected() - Got lock ...
+21 Dec 2018 17:47:52,435 [restartedMain] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:47:52,436 [restartedMain] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - AgentSDKConnected
+21 Dec 2018 17:47:52,436 [restartedMain] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@77f43236
+21 Dec 2018 17:47:52,436 [restartedMain] FINEST  - SocketClient.runThread:96 - SocketClient::RunThread() creating new thread.
+21 Dec 2018 17:47:52,437 [restartedMain] FINEST  - InitPOMAgentFactory.getExistingPOMAgent:1096 - getExistingPOMAgent
+21 Dec 2018 17:47:52,437 [restartedMain] FINEST  - InitPOMAgentFactory.getExistingPOMAgent:1135 - getExistingPOMAgent() - Sending agent -1
+21 Dec 2018 17:47:52,447 [KeepSocketAliveThread54] FINEST  - InitPOMAgentFactory$1.run:136 - POMAgentFactory::KeepClientSocketAliveThread() - Started ...
+21 Dec 2018 17:47:52,450 [TryConnectingToPOMThread55] FINE   - InitPOMAgentFactory$2.run:232 - POMAgentFactory::TryConnectingToPOMThread() TryConnectingToPOMThread starting ....
+21 Dec 2018 17:47:52,449 [restartedMain] FINE   - InitPOMAgentFactory.init:283 - POMAgentFactory::init() DONE
+21 Dec 2018 17:47:52,495 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:47:52,495 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:47:52,498 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : AgentSDKConnected             C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:47:52,744 [SocketClient-50] FINEST  - SocketClient.run:561 - SocketClient::ProcessThread() bytesRead from socket - (10.135.9.45:9970) packet - [65, 103, 101, 110, 116, 83, 68, 75, 67, 111, 110, 110, 101, 99, 116, 101, 100, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 82, 45, 49, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 53, 51, 48, 32, 32, 32, 32, 32, 49, 32, 32, 32, 48, 32, 32, 32, 32, 49, 52, 32, 32, 32, 32, 32, 32, 83, 101, 115, 115, 105, 111, 110, 73, 68, 61, 78, 85, 76, 76, 3] size = 101
+21 Dec 2018 17:47:52,744 [SocketClient-50] FINEST  - IncomingPacketProcessor.addPacketToQueue:67 - IncomingPacketProcessor::addPacketToQueue
+21 Dec 2018 17:47:52,752 [Thread-12] FINEST  - SocketUtil.processPacketReceived:250 - SocketUtil::processPacketReceived() 
+******************************************************************************************
+ POM_METRICS CLIENT : Received header = AgentSDKConnected             R-1                            530     0    packet = AgentSDKConnected             R-1                            530     0   0     params = SessionID=NULL
+******************************************************************************************
+21 Dec 2018 17:47:52,759 [AgentEventListener52] FINEST  - AgentEventListener.processEvent:185 - AgentEventListener::processEvent() receiverQ size = 1
+21 Dec 2018 17:47:52,759 [AgentEventListener52] FINEST  - AgentEventListener.processEvent:194 - AgentEventListener::processEvent() socketFeedback header = AgentSDKConnected:R:530 packet = AgentSDKConnected             R-1                            530     0   0     params = SessionID=NULL
+21 Dec 2018 17:47:52,759 [AgentEventListener52] FINEST  - AgentEventListener.processSocketFeedback:236 - AgentEventListener::processSocketFeedback() Fri Dec 21 17:47:52 CST 2018RECEIVED FROM PAM: AgentSDKConnected WITH ID:530
+21 Dec 2018 17:47:52,771 [AgentEventListener52] FINEST  - InitPOMAgentFactory.checkOrCreateLockForAgent:1402 - POMAgentFactory::checkOrCreateLockForAgent() Creating lock for -1 at Fri Dec 21 17:47:52 CST 2018 TID (52)
+21 Dec 2018 17:47:52,773 [pool-1-thread-1] FINEST  - InitPOMAgentFactory.getLock:1386 - POMAgentFactory::getLock() Lock found for -1 at Fri Dec 21 17:47:52 CST 2018 TID (66)
+21 Dec 2018 17:47:52,773 [pool-1-thread-1] FINEST  - AgentFeedbackExecutor.run:61 - AgentFeedbackExecutor::run() Trying to lock for -1
+21 Dec 2018 17:47:52,774 [pool-1-thread-1] FINEST  - AgentFeedbackExecutor.run:70 - AgentFeedbackExecutor::run() Got lock for -1 for AgentSDKConnectedRESP
+21 Dec 2018 17:47:52,774 [POMSDKAgentFeedbackExecutor--1-66] FINEST  - AgentFeedbackExecutor.invoke:196 - DONE INVOKE FOR : class com.avaya.sdk.Internal.InternalPOMAgentHandler WITH ID:530
+21 Dec 2018 17:47:52,774 [POMSDKAgentFeedbackExecutor--1-66] FINEST  - InitPOMAgentFactory.removeIfLockDone:1424 - POMAgentFactory::removeIfLockDone() Lock unlocked for -1 at Fri Dec 21 17:47:52 CST 2018 TID (66)
+21 Dec 2018 17:47:52,774 [POMSDKAgentFeedbackExecutor--1-66] FINEST  - InitPOMAgentFactory.removeIfLockDone:1429 - POMAgentFactory::removeIfLockDone() Removed lock for -1 at Fri Dec 21 17:47:52 CST 2018 TID (66)
+21 Dec 2018 17:47:52,775 [POMSDKAgentFeedbackExecutor--1-66] FINEST  - AgentFeedbackExecutor.run:97 - AgentFeedbackExecutor::run() Task done for -1 for AgentSDKConnectedRESP
+21 Dec 2018 17:48:22,451 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:48:22,451 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:48:22,451 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@687e71bb
+21 Dec 2018 17:48:22,467 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:48:22,468 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:48:22,468 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:48:52,452 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:48:52,452 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:48:52,452 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@6c41e86c
+21 Dec 2018 17:48:52,458 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:48:52,458 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:48:52,459 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:49:22,453 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:49:22,453 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:49:22,453 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@29437b80
+21 Dec 2018 17:49:22,495 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:49:22,495 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:49:22,496 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:49:52,453 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:49:52,453 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:49:52,453 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@348acd7
+21 Dec 2018 17:49:52,467 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:49:52,467 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:49:52,467 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:50:01,985 [restartedMain] FINE   - InitPOMAgentFactory.init:72 - POMAgentFactory::init() - Starting ...
+21 Dec 2018 17:50:01,985 [restartedMain] FINE   - InitPOMAgentFactory.init:287 - POMAgentFactory::init() ALREADY DONE.
+21 Dec 2018 17:50:22,454 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:50:22,454 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:50:22,454 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@18a0f6ac
+21 Dec 2018 17:50:22,491 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:50:22,491 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:50:22,491 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:50:52,456 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:50:52,457 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:50:52,457 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@7b417f5c
+21 Dec 2018 17:50:52,494 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:50:52,494 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:50:52,494 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:51:22,458 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:51:22,458 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:51:22,458 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@496c84cf
+21 Dec 2018 17:51:22,486 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:51:22,486 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:51:22,486 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:51:52,507 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:51:52,508 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:51:52,508 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@f04b721
+21 Dec 2018 17:51:52,529 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:51:52,530 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:51:52,530 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:52:22,508 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:52:22,508 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:52:22,508 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@100e35fb
+21 Dec 2018 17:52:22,551 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:52:22,551 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:52:22,551 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:52:52,509 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:52:52,509 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:52:52,509 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@60451339
+21 Dec 2018 17:52:52,557 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:52:52,557 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:52:52,557 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:53:22,509 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:53:22,509 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:53:22,509 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@4d22b902
+21 Dec 2018 17:53:22,554 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:53:22,554 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:53:22,554 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:53:52,509 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:53:52,509 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:53:52,509 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@67b5a238
+21 Dec 2018 17:53:52,525 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:53:52,525 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:53:52,525 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:54:22,510 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:54:22,510 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:54:22,510 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@675f2d8
+21 Dec 2018 17:54:22,537 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:54:22,537 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:54:22,537 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:54:52,511 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:54:52,511 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:54:52,511 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@4e61e5f4
+21 Dec 2018 17:54:52,533 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:54:52,533 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:54:52,533 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:55:22,513 [KeepSocketAliveThread54] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:55:22,514 [KeepSocketAliveThread54] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - POMClientAlive
+21 Dec 2018 17:55:22,514 [KeepSocketAliveThread54] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@1653af93
+21 Dec 2018 17:55:22,545 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:55:22,546 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:55:22,546 [SocketClientSender-53] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : POMClientAlive                C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:56:30,556 [restartedMain] FINE   - InitPOMAgentFactory.init:72 - POMAgentFactory::init() - Starting ...
+21 Dec 2018 17:56:30,561 [restartedMain] FINE   - InitPOMAgentFactory.init:91 - POMAgentFactory::init() - Printing libUserAddress Map :
+21 Dec 2018 17:56:30,563 [restartedMain] FINE   - InitPOMAgentFactory.init:95 - POMAgentFactory::init() - libUserAddressMap[0] 10.135.9.45:9970
+21 Dec 2018 17:56:30,568 [restartedMain] FINEST  - IncomingPacketProcessor.<init>:20 - IncomingPacketProcessor::IncomingPacketProcessor
+21 Dec 2018 17:56:30,568 [restartedMain] FINEST  - IncomingPacketProcessor.runThread:32 - IncomingPacketProcessor::RunThread 
+21 Dec 2018 17:56:30,570 [restartedMain] FINE   - InitPOMAgentFactory.tryConnectingToPOM:459 - POMAgentFactory::tryConnectingToPOM() HARDCODING - sending Default as the hard coded value for zone name. Invoking connectToServer
+21 Dec 2018 17:56:30,571 [restartedMain] FINEST  - SocketClient.connectToServer:171 - SocketClient::connectToServer() exitFlag = true agentName = -1 exitIfCannotConnectFlag = true stopSocketClientThread = false
+21 Dec 2018 17:56:30,572 [restartedMain] FINEST  - SocketClient.connectToServer:223 - SocketClient::connectToServer() - Closed open streams and sslsocket.
+21 Dec 2018 17:56:30,572 [restartedMain] FINEST  - SocketClient.connectToServer:230 - Trying to connect to server : 10.135.9.45
+21 Dec 2018 17:56:31,857 [restartedMain] FINEST  - SocketClient.connectToServer:248 - Connect Successful.!!!
+21 Dec 2018 17:56:31,858 [restartedMain] FINE   - InitPOMAgentFactory.sendSDKStartedCmdToPAM:557 - POMAgentFactory::sendSDKStartedCmdToPAM()
+21 Dec 2018 17:56:31,858 [restartedMain] FINEST  - InitPOMAgentFactory.sendSDKStartedCmdToPAM:569 - POMAgentFactory::sendSDKStartedCmdToPAM() agentListString = 
+21 Dec 2018 17:56:31,858 [restartedMain] FINEST  - InitPOMAgentFactory.getExistingPOMAgent:1096 - getExistingPOMAgent
+21 Dec 2018 17:56:31,859 [restartedMain] FINEST  - InitPOMAgentFactory.getExistingPOMAgent:1137 - getExistingPOMAgent() - agent not found for -1
+21 Dec 2018 17:56:31,859 [restartedMain] FINEST  - InitPOMAgentFactory.sendSDKStartedCmdToPAM:578 - POMAgentFactory::sendSDKStartedCmdToPAM() created new InternalAgentHandler
+21 Dec 2018 17:56:31,863 [restartedMain] FINEST  - InitPOMAgentFactory.getPOMAgent:1036 - POMAgentFactory::getPOMAgent() - id: -1
+21 Dec 2018 17:56:31,865 [restartedMain] FINE   - POMAgent.AgentSDKConnected:1975 - POMAgent::AgentSDKConnected() - -1
+21 Dec 2018 17:56:31,866 [restartedMain] FINE   - POMAgent.AgentSDKConnected:1976 - POMAgent::AgentSDKConnected() - setting sockClient for internal agent = -1
+21 Dec 2018 17:56:31,866 [restartedMain] FINEST  - POMAgent.AgentSDKConnected:1980 - POMAgent::AgentSDKConnected() - Got lock ...
+21 Dec 2018 17:56:31,869 [restartedMain] FINEST  - SocketClient.send:583 - SocketClient::send() - Waiting for lock ...
+21 Dec 2018 17:56:31,870 [restartedMain] FINEST  - SocketClient.send:587 - SocketClient::send() - adding ID: 999 packet - AgentSDKConnected
+21 Dec 2018 17:56:31,870 [restartedMain] FINEST  - SocketClient.send:588 - SocketClient::send() - queue size is 0 adding agentCommand = com.avaya.sdk.Internal.AgentCommand@7e1f381b
+21 Dec 2018 17:56:31,870 [restartedMain] FINEST  - SocketClient.runThread:96 - SocketClient::RunThread() creating new thread.
+21 Dec 2018 17:56:31,871 [restartedMain] FINEST  - InitPOMAgentFactory.getExistingPOMAgent:1096 - getExistingPOMAgent
+21 Dec 2018 17:56:31,871 [restartedMain] FINEST  - InitPOMAgentFactory.getExistingPOMAgent:1135 - getExistingPOMAgent() - Sending agent -1
+21 Dec 2018 17:56:31,882 [restartedMain] FINE   - InitPOMAgentFactory.init:283 - POMAgentFactory::init() DONE
+21 Dec 2018 17:56:31,882 [KeepSocketAliveThread53] FINEST  - InitPOMAgentFactory$1.run:136 - POMAgentFactory::KeepClientSocketAliveThread() - Started ...
+21 Dec 2018 17:56:31,899 [TryConnectingToPOMThread54] FINE   - InitPOMAgentFactory$2.run:232 - POMAgentFactory::TryConnectingToPOMThread() TryConnectingToPOMThread starting ....
+21 Dec 2018 17:56:31,956 [SocketClientSender-55] FINEST  - SocketClientSender.processSenderQueue:90 - SocketClientSender::processSenderQueue() senderQueue size : 1
+21 Dec 2018 17:56:31,958 [SocketClientSender-55] FINEST  - SocketClientSender.processSenderQueue:104 - SocketClientSender::processSenderQueue() Drained size : 1
+21 Dec 2018 17:56:31,968 [SocketClientSender-55] FINEST  - SocketClientSender.processSenderQueue:117 - SocketClientSender::processSenderQueue() Sending : 
+*********************************************************************************
+ POM_METRICS CLIENT (10.135.9.45:9970): Sending  : AgentSDKConnected             C-1                            999     1   0   
+*********************************************************************************
+
+21 Dec 2018 17:56:32,201 [SocketClient-50] FINEST  - SocketClient.run:561 - SocketClient::ProcessThread() bytesRead from socket - (10.135.9.45:9970) packet - [65, 103, 101, 110, 116, 83, 68, 75, 67, 111, 110, 110, 101, 99, 116, 101, 100, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 82, 45, 49, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 53, 51, 49, 32, 32, 32, 32, 32, 49, 32, 32, 32, 48, 32, 32, 32, 32, 49, 52, 32, 32, 32, 32, 32, 32, 83, 101, 115, 115, 105, 111, 110, 73, 68, 61, 78, 85, 76, 76, 3] size = 101
+21 Dec 2018 17:56:32,202 [SocketClient-50] FINEST  - IncomingPacketProcessor.addPacketToQueue:67 - IncomingPacketProcessor::addPacketToQueue
+21 Dec 2018 17:56:32,204 [Thread-12] FINEST  - SocketUtil.processPacketReceived:250 - SocketUtil::processPacketReceived() 
+******************************************************************************************
+ POM_METRICS CLIENT : Received header = AgentSDKConnected             R-1                            531     0    packet = AgentSDKConnected             R-1                            531     0   0     params = SessionID=NULL
+******************************************************************************************
+21 Dec 2018 17:56:32,256 [AgentEventListener52] FINEST  - AgentEventListener.processEvent:185 - AgentEventListener::processEvent() receiverQ size = 1
+21 Dec 2018 17:56:32,257 [AgentEventListener52] FINEST  - AgentEventListener.processEvent:194 - AgentEventListener::processEvent() socketFeedback header = AgentSDKConnected:R:531 packet = AgentSDKConnected             R-1                            531     0   0     params = SessionID=NULL
+21 Dec 2018 17:56:32,258 [AgentEventListener52] FINEST  - AgentEventListener.processSocketFeedback:236 - AgentEventListener::processSocketFeedback() Fri Dec 21 17:56:32 CST 2018RECEIVED FROM PAM: AgentSDKConnected WITH ID:531
+21 Dec 2018 17:56:32,278 [AgentEventListener52] FINEST  - InitPOMAgentFactory.checkOrCreateLockForAgent:1402 - POMAgentFactory::checkOrCreateLockForAgent() Creating lock for -1 at Fri Dec 21 17:56:32 CST 2018 TID (52)
+21 Dec 2018 17:56:32,351 [pool-1-thread-1] FINEST  - InitPOMAgentFactory.getLock:1386 - POMAgentFactory::getLock() Lock found for -1 at Fri Dec 21 17:56:32 CST 2018 TID (64)
+21 Dec 2018 17:56:32,355 [pool-1-thread-1] FINEST  - AgentFeedbackExecutor.run:61 - AgentFeedbackExecutor::run() Trying to lock for -1
+21 Dec 2018 17:56:32,356 [pool-1-thread-1] FINEST  - AgentFeedbackExecutor.run:70 - AgentFeedbackExecutor::run() Got lock for -1 for AgentSDKConnectedRESP
+21 Dec 2018 17:56:32,357 [POMSDKAgentFeedbackExecutor--1-64] FINEST  - AgentFeedbackExecutor.invoke:196 - DONE INVOKE FOR : class com.avaya.sdk.Internal.InternalPOMAgentHandler WITH ID:531
+21 Dec 2018 17:56:32,361 [POMSDKAgentFeedbackExecutor--1-64] FINEST  - InitPOMAgentFactory.removeIfLockDone:1424 - POMAgentFactory::removeIfLockDone() Lock unlocked for -1 at Fri Dec 21 17:56:32 CST 2018 TID (64)
+21 Dec 2018 17:56:32,363 [POMSDKAgentFeedbackExecutor--1-64] FINEST  - InitPOMAgentFactory.removeIfLockDone:1429 - POMAgentFactory::removeIfLockDone() Removed lock for -1 at Fri Dec 21 17:56:32 CST 2018 TID (64)
+21 Dec 2018 17:56:32,363 [POMSDKAgentFeedbackExecutor--1-64] FINEST  - AgentFeedbackExecutor.run:97 - AgentFeedbackExecutor::run() Task done for -1 for AgentSDKConnectedRESP
