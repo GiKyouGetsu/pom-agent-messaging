@@ -1,5 +1,6 @@
 package com.avaya.ept.server;
 
+import javax.websocket.CloseReason;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -11,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import com.avaya.ept.pom.pojo.APICommand;
 import com.avaya.ept.pom.pojo.MessageObj;
 import com.avaya.ept.pom.pojo.MessageObj.Type;
 import com.avaya.ept.pom.worker.ReqCommandHandler;
@@ -23,7 +25,7 @@ public class SocketServer {
     private static final Logger logger = LogManager.getLogger(SocketServer.class);
     private static final ReqCommandHandler reqCommandHandler = new ReqCommandHandler();
     
-    private Session session;
+//    private Session session;
 
     /**
      * connect the websocket
@@ -36,7 +38,7 @@ public class SocketServer {
         logger.info("session connected");
         logger.info("On messgage session id: " + session.getId());
 //        LOGGER.info("Agent id = " + agent + " connected the socket");
-        this.session = session;
+//        this.session = session;
         
 //        sessionPool.put(agent, session);
     }
@@ -51,135 +53,135 @@ public class SocketServer {
         try {
             msgobj = ConvertUtil.parseJson(message);
             if (msgobj.getType().equals(Type.REQEUST)) {
-                logger.info("POM REQUEST METHOD::" + msgobj.getMethod());
+                logger.info("POM REQUEST Command:" + msgobj.getMethod());
                 switch (msgobj.getMethod()) {
-                case "AGTLogon":
+                case APICommand.AGTLogon:
                     reqCommandHandler.handleAGTLogon(msgobj, session);
                     break;
-                case "AGTLogoff":
+                case APICommand.AGTLogoff:
                     reqCommandHandler.handleAGTLogout(msgobj, session);
                     break;
-                case "AGTGetErrorString":
+                case APICommand.AGTGetErrorString:
                     reqCommandHandler.handleAGTGetErrorString(msgobj, session);
                     break;
-                case "AGTStateChange":
+                case APICommand.AGTStateChange:
                     reqCommandHandler.handleAGTStateChange(msgobj, session);
                     break;
-                case "AGTHoldCall":
+                case APICommand.AGTHoldCall:
                     reqCommandHandler.handleAGTHoldCall(msgobj, session);
                     break;
-                case "AGTUnHoldCall":
+                case APICommand.AGTUnHoldCall:
                     reqCommandHandler.handleAGTUnHoldCall(msgobj, session);
                     break;
-                case "AGTReleaseLine":
+                case APICommand.AGTReleaseLine:
                     reqCommandHandler.handleAGTReleaseLine(msgobj, session);
                     break;
-                case "AGTGetCompCodes":
+                case APICommand.AGTGetCompCodes:
                     reqCommandHandler.handleAGTGetCompCodes(msgobj, session);
                     break;
-                case "AGTWrapupContact": 
+                case APICommand.AGTWrapupContact: 
                     reqCommandHandler.handleAGTWrapupContact(msgobj, session);
                     break;
-                case "AGTExtendWrapup":
+                case APICommand.AGTExtendWrapup:
                     reqCommandHandler.handleAGTExtendWrapup(msgobj, session);
                     break;
-                case "AGTGetConsultTypes":
+                case APICommand.AGTGetConsultTypes:
                     reqCommandHandler.handleAGTGetConsultTypes(msgobj, session);
                     break;
-                case "AGTGetConsultDestsForType":
+                case APICommand.AGTGetConsultDestsForType:
                     reqCommandHandler.handleAGTGetConsultDestsForType(msgobj, session);
                     break;
-                case "AGTConsultCall":
+                case APICommand.AGTConsultCall:
                     reqCommandHandler.handleAGTConsultCall(msgobj, session);
                     break;
-                case "AGTCompleteTransfer":
+                case APICommand.AGTCompleteTransfer:
                     reqCommandHandler.handleAGTCompleteTransfer(msgobj, session);
                     break;
-                case "AGTCancelConsult":
+                case APICommand.AGTCancelConsult:
                     reqCommandHandler.handleAGTCancelConsult(msgobj, session);
                     break;
-                case "AGTStartConf":
+                case APICommand.AGTStartConf:
                     reqCommandHandler.handleAGTStartConf(msgobj, session);
                     break;
-                case "AGTEndConf":
+                case APICommand.AGTEndConf:
                     reqCommandHandler.handleAGTEndConf(msgobj, session);
                     break;
-                case "AGTConfChangeOwnership":
+                case APICommand.AGTConfChangeOwnership:
                     reqCommandHandler.handleAGTConfChangeOwnership(msgobj, session);
                     break;
-                case "AGTRedial":
+                case APICommand.AGTRedial:
                     reqCommandHandler.handleAGTRedial(msgobj, session);
                     break;
-                case "AGTSendDTMF":
+                case APICommand.AGTSendDTMF:
                     reqCommandHandler.handleAGTSendDTMF(msgobj, session);
                     break;
                 case "AGTGetCallbackTypes":
                     reqCommandHandler.handleAGTGetCallbackTypes(msgobj, session);
                     break;
-                case "AGTGetCallbackTypesForTypes":
-                    reqCommandHandler.handleAGTGetCallbackTypesForTypes(msgobj, session);
+                case APICommand.AGTGetCallbackTypesForTypes:
+                    reqCommandHandler.handleAGTGetCallbackDestsForType(msgobj, session);
                     break;
-                case "AGTCreateCallback":
+                case APICommand.AGTCreateCallback:
                     reqCommandHandler.handleAGTCreateCallback(msgobj, session);
                     break;
-                case "AGTGetErrorInfo":
+                case APICommand.AGTGetErrorInfo:
                     reqCommandHandler.handleAGTGetErrorInfo(msgobj, session);
                     break;
-                case "AGTPreviewDial":
+                case APICommand.AGTPreviewDial:
                     reqCommandHandler.handleAGTPreviewDial(msgobj, session);
                     break;
-                case "AGTPreviewCancel":
+                case APICommand.AGTPreviewCancel:
                     reqCommandHandler.handleAGTPreviewCancel(msgobj, session);
                     break;
-                case "AGTGetCustomerDetails":
+                case APICommand.AGTGetCustomerDetails:
                     reqCommandHandler.handleAGTGetCustomerDetails(msgobj, session);
                     break;
-                case "AGTSetCustomerDetail":
+                case APICommand.AGTSetCustomerDetail:
                     reqCommandHandler.handleAGTSetCustomerDetail(msgobj, session);
                     break;
-                case "AGTBlendToInbound":
+                case APICommand.AGTBlendToInbound:
                     reqCommandHandler.handleAGTBlendToInbound(msgobj, session);
                     break;
-                case "AGTBlendToOutbound":
+                case APICommand.AGTBlendToOutbound:
                     reqCommandHandler.handleAGTBlendToOutbound(msgobj, session);
                     break;
-                case "AGTNailupAgent":
+                case APICommand.AGTNailupAgent:
                     reqCommandHandler.handleAGTNailupAgent(msgobj, session);
                     break;
-                case "AGTReadyForNailup":
+                case APICommand.AGTReadyForNailup:
                     reqCommandHandler.handleAGTReadyForNailup(msgobj, session);
                     break;
-                case "AGTLostNailing":
+                case APICommand.AGTLostNailing:
                     reqCommandHandler.handleAGTLostNailing(msgobj, session);
                     break;
-                case "AGTPendingLogout":
+                case APICommand.AGTPendingLogout:
                     reqCommandHandler.handleAGTPendingLogout(msgobj, session);
                     break;
-                case "AGTAddAgentNote":
+                case APICommand.AGTAddAgentNote:
                     reqCommandHandler.handleAGTAddAgentNote(msgobj, session);
                     break;
-                case "AGTRefreshAgentNotes":
+                case APICommand.AGTRefreshAgentNotes:
                     reqCommandHandler.handleAGTRefreshAgentNotes(msgobj, session);
                     break;
-                case "AGTGetTimezones":
+                case APICommand.AGTGetTimezones:
                     reqCommandHandler.handleAGTGetTimezones(msgobj, session);
                     break;
-                case "AGTAvailableForNailup":
+                case APICommand.AGTAvailableForNailup:
                     reqCommandHandler.handleAGTAvailableForNailup(msgobj, session);
                     break;
-                case "AGTAgentDisconnected":
+                case APICommand.AGTAgentDisconnected:
                     reqCommandHandler.handleAGTAgentDisconnected(msgobj, session);
                     break;
-                case "AGTAddToDNC":
+                case APICommand.AGTAddToDNC:
                     reqCommandHandler.handleAGTAddToDNC(msgobj, session);
                     break;
-                case "AGTIsInDNC":
+                case APICommand.AGTIsInDNC:
                     reqCommandHandler.handleAGTIsInDNC(msgobj, session);
                     break;
-                case "AGTGetZoneList":
+                case APICommand.AGTGetZoneList:
                     reqCommandHandler.handleAGTGetZoneList(msgobj, session);
                     break;
-                case "AGTGetContactAttributes":
+                case APICommand.AGTGetContactAttributes:
                     reqCommandHandler.handleAGTGetContactAttributes(msgobj, session);
                     break;
                 default:
@@ -197,22 +199,25 @@ public class SocketServer {
 
     /**
      * Closed the socket connect
-     */
+     */ 
     @OnClose
-    public void onClose(){
-        logger.info("Session id = [" + this.session.getId() + "] socket closed" );
+    public void onClose(Session session, CloseReason reaon){
+        logger.info("Session id = [" + session.getId() + "] socket closed" );
+        logger.info("Session id = [" + session.getId() + "] CloseReason= " + reaon.getReasonPhrase() );
+        
         reqCommandHandler.handleException(session);
     }
 
     /**
-     * Error with socket connected
+     * Error with socket connected 
      * @param session
      * @param error
      */
     @OnError
     public void onError(Session session, Throwable error) {
-        reqCommandHandler.handleException(session);
-        logger.error("Session id = [" + this.session.getId() + "] socket onError");
+//        reqCommandHandler.handleException(session);
+        logger.error("Session id = [" + session.getId() + "] socket onError");
         logger.error("Error: ", error);
     }
 }
+

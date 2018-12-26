@@ -18,7 +18,7 @@ public class POMAgentFactoryInit implements CommandLineRunner {
     @Value("${pom.cert.path}")
     private String pomCertPath;
     
-    @Value("${pom.cert.path}")
+    @Value("${pom.cert.path}") 
     private String pomCertPassword;
     
     @Value("${pom.server.address}")

@@ -1,8 +1,10 @@
 package com.avaya.ept.pom.worker;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import javax.enterprise.inject.New;
 import javax.websocket.Session;
 
 import org.apache.logging.log4j.LogManager;
@@ -23,6 +25,8 @@ import com.avaya.sdk.Data.POMDestination;
 import com.avaya.sdk.Data.POMDestinationType;
 import com.avaya.sdk.Data.POMErrorCode;
 import com.avaya.sdk.Data.POMKeyValuePair;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ReqCommandHandler {
@@ -63,8 +67,10 @@ public class ReqCommandHandler {
             agentSession.setSocketSession(session);
             agentSession.setStation(agentExt);
             agentSession.setAgentWorker(worker);
+            agentSession.setAgentID(agentId);
+            worker.setAgentSession(agentSession);
             
-            this.manager.addAgentSession(agentSession);
+//            this.manager.addAgentSession(agentSession);
         } catch (Exception e) {
             logger.info("AGTLogon error");
             logger.error(e);
@@ -79,7 +85,7 @@ public class ReqCommandHandler {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
             pomAgent.AGTLogoff();
-            this.manager.removeAgentSession(session.getId());
+//            this.manager.removeAgentSession(session.getId());
             
         } catch (Exception e) {
             logger.info("AGTLogon error");
@@ -414,7 +420,7 @@ public class ReqCommandHandler {
         }
     }
     
-    public void handleAGTGetCallbackTypesForTypes(MessageObj messageObj, Session session) {
+    public void handleAGTGetCallbackDestsForType(MessageObj messageObj, Session session) {
         
         logger.info("AGT POM Command:: AGTGetCallbackDestsForType");
         try {
@@ -777,7 +783,9 @@ public class ReqCommandHandler {
     public void handleException(Session session) {
         logger.info("Session id= [" + session.getId() + "]" + " Exception, Forced to logout this agent");
         try {
-            this.manager.getAgentSessionBySocketSessionId(session.getId()).getAgentWorker().getPomAgtObj().AGTLogoff();
+            if  (this.manager.getAgentSessionBySocketSessionId(session.getId()).getAgentWorker().getPomAgtObj() != null) {
+                this.manager.getAgentSessionBySocketSessionId(session.getId()).getAgentWorker().getPomAgtObj().AGTAgentDisconnected();
+            }
         } catch (Exception e) {
             logger.error("Logoff agent = [" 
                     + this.manager.getAgentSessionBySocketSessionId(session.getId()).getAgentID() 
@@ -802,5 +810,45 @@ public class ReqCommandHandler {
                 logger.error(e);
             }
         } 
+    }
+    
+    public static void main(String a[]) {
+        
+        String jsonString = "{\"state\":\"\",\"wireless\":\"\",\"name\":\"name\",\"number\":\"3642\",\"isDefault\":false,\"timezone\":\"\"}" ;
+        
+        
+        
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            POMContactNumber contactNumber = new POMContactNumber();
+            contactNumber.setIsDefault(false);
+            contactNumber.setName("name");
+            contactNumber.setNumber("3642");
+            
+            System.out.println("POMContactNumber::" + objectMapper.writeValueAsString(contactNumber));
+            System.out.println("POMCompletionCode::" + objectMapper.writeValueAsString(new POMCompletionCode()));
+            System.out.println("AGTConsultCall::" + objectMapper.writeValueAsString(new POMDestination()));
+            System.out.println("handleAGTRedial::" + objectMapper.writeValueAsString(new POMCompletionCode()));
+            System.out.println("AGTCreateCallback::POMCallbackDest" + objectMapper.writeValueAsString(new POMCallbackDest()));
+            System.out.println("AGTCreateCallback::POMContactNumber" + objectMapper.writeValueAsString(new POMContactNumber()));
+            System.out.println("AGTGetErrorInfo::POMErrorCode" + objectMapper.writeValueAsString(new POMErrorCode()));
+            System.out.println("AGTSetCustomerDetail::POMKeyValuePair" + objectMapper.writeValueAsString(new POMKeyValuePair()));
+            System.out.println("AGTAddToDNC::POMAttribute【】" + objectMapper.writeValueAsString(new POMAttribute()));
+            
+            
+            
+//            POMContactNumber contactNumber3 = objectMapper.readValue(jsonString,  POMContactNumber.class);
+//            System.out.println(contactNumber.getNumber());
+//            System.out.println(contactNumber3.getNumber());
+        } catch (JsonParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (JsonMappingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }

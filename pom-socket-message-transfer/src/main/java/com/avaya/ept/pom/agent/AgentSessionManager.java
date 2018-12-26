@@ -1,5 +1,7 @@
 package com.avaya.ept.pom.agent;
 
+import java.util.Iterator;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.logging.log4j.LogManager;
@@ -31,12 +33,20 @@ public class AgentSessionManager {
         
     }
     
-    public void removeAgentSession(String socketSessionId) {
+    public void removeAgentSessionBySocketsessionId(String socketSessionId) {
         logger.info("begin to remove session");
         AgentSession agentSession = getAgentSessionBySocketSessionId(socketSessionId);
         if (agentSession != null) {
             if (agentSessionMap.containsKey(agentSession.getSocketSessionId())) {
                 logger.info("get remove session");
+                agentSessionMap.remove(agentSession.getSocketSessionId());
+            }
+        }
+    }
+    
+    public void removeAgentSession(AgentSession agentSession) {
+        if (agentSession != null) {
+            if (agentSessionMap.containsKey(agentSession.getSocketSessionId())) {
                 agentSessionMap.remove(agentSession.getSocketSessionId());
             }
         }
@@ -49,5 +59,26 @@ public class AgentSessionManager {
     
     public ConcurrentHashMap<String, AgentSession> getagentSessionMap() {
         return agentSessionMap;
+    }
+    
+    
+    /**
+     * @param agentId
+     * @return true is mean agent is already logon
+     * @return false is mean agent is not logon
+     */
+    public boolean agentIsLogon(String agentId) {
+        if (agentId != null) {
+            Iterator<Entry<String, AgentSession>> iter = agentSessionMap.entrySet().iterator(); 
+            while (iter.hasNext()) {
+                Entry<String, AgentSession> entry = (Entry<String, AgentSession>) iter.next(); 
+                AgentSession agentSession = entry.getValue();
+                if (agentSession.getAgentID().equals(agentId)) {
+                    return true;
+                } 
+                return false;
+            } 
+        }
+        return false;
     }
 }

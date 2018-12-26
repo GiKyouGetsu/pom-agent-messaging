@@ -54,11 +54,6 @@ public class MessageObj {
     }
     
     public static void sendMessage(Session session, String message) {
-        try {
-            session.getBasicRemote().sendText(message);
-        } catch (IOException e) {
-            logger.error("Send message to frontend error");
-            logger.error(e);
-        }
+        session.getAsyncRemote().sendText(message);
     }
 }

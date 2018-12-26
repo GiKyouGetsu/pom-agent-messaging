@@ -1,0 +1,85 @@
+logout {"REQUEST":{"METHOD":"AGTLogoff","Parameters":[]}}
+	
+login  {"REQUEST":{"METHOD":"AGTLogon","Parameters":[{"name":"agentID","value":"3546"},{"name":"agentExt","value":"3612"},{"name":"pwd","value":"1234"},{"name":"isForce","value":"true"},{"name":"locale","value":"en-US"},{"name":"timeZone","value":"IST"},{"name":"zoneName","value":"Default"}]}}
+
+ logger.info("Method::AGTLogonRESP Invoked.");
+        Map<String, String> resp = new HashMap<>();
+        resp.put("result", String.valueOf(result));
+        resp.put("METHOD", "AGTLogonRESP");
+        
+        ObjectMapper objectMapper = new ObjectMapper();
+        String respJson = objectMapper.writeValueAsString(resp);
+        logger.info("Send Message to session id=" + this.socketSession.getId()  + "RESP= "+ respJson);
+        
+        MessageObj.sendMessage(this.socketSession, respJson);
+		
+
+{"state":"","wireless":"","name":"name","number":"3642","isDefault":false,"timezone":""}
+{
+	"state": {
+		"key": "Phone 1 State",
+		"value": "",
+		"attributeType": "WRITE"
+	},
+	"wireless": {
+		"key": "",
+		"value": "",
+		"attributeType": "READ_ONLY"
+	},
+	"phoneNumber": 3613,
+	"timezone": {
+		"key": "Phone 1 Wireless",
+		"value": "",
+		"attributeType": "WRITE"
+	},
+	"countryCode": {
+		"key": "Phone 1 Country Code",
+		"value": "86",
+		"attributeType": "WRITE"
+	}
+}
+
+	
+		
+POMContactNumber    ::                 {"state":"","wireless":"","name":"name","number":"3642","isDefault":false,"timezone":""}
+POMCompletionCode   ::                 {"codeID":"","codeValue":""}
+AGTConsultCall      ::                 {"destinationValue":"","destinationName":"","destinationType":"Agent","presence":"","state":"","timeZone":""}
+handleAGTRedial     ::                 {"codeID":"","codeValue":""}
+AGTCreateCallback   ::POMCallbackDest  {"callbackTypeSpecified":false,"destinationValue":"","destinationName":"","presence":"","callbackType":"Standard","state":"","timeZone":"","pomZone":""}
+AGTCreateCallback   ::POMContactNumber {"state":"","wireless":"","name":"","number":"","isDefault":false,"timezone":""}
+AGTGetErrorInfo     ::POMErrorCode     {"errorCode":"","apiName":""}
+AGTSetCustomerDetail::POMKeyValuePair  {"key":"","value":""}
+AGTAddToDNC         ::POMAttribute[]   {"key":"","value":"","attributeType":"READ_ONLY"}
+
+
+
+
+
+
+{
+	"state": {
+		"key": "Phone 1 State",
+		"value": "",
+		"attributeType": "WRITE"
+	},
+	"wireless": {
+		"key": "",
+		"value": "",
+		"attributeType": "READ_ONLY"
+	},
+	"timezone": {
+		"key": "Phone 1 Wireless",
+		"value": "",
+		"attributeType": "WRITE"
+	},
+	"phoneNumber": {
+		"key": "Phone 1",
+		"value": "3613",
+		"attributeType": "WRITE"
+	},
+	"countryCode": {
+		"key": "Phone 1 Country Code",
+		"value": "86",
+		"attributeType": "WRITE"
+	}
+}

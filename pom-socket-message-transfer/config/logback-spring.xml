@@ -14,7 +14,7 @@
             <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{35} - %msg %n</Pattern>
             <charset>UTF-8</charset>  
         </encoder>
-        <file>logs/pom-socket-message-transfer.log</file>
+        <file>logs/pomsocketmessage.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 		    <!-- daily rollover -->
 		    <FileNamePattern>logs/pomSocketMessage-%d{yyyy-MM-dd}.log.gz</FileNamePattern> 

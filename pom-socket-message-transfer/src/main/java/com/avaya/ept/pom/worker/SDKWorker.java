@@ -9,12 +9,13 @@ import javax.websocket.Session;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.avaya.ept.pom.agent.AgentSession;
+import com.avaya.ept.pom.agent.AgentSessionManager;
 import com.avaya.ept.pom.pojo.MessageObj;
 import com.avaya.sdk.PAMSocketInfo;
 import com.avaya.sdk.Agent.POMAgent;
 import com.avaya.sdk.Agent.POMAgentHandlerInterface;
 import com.avaya.sdk.Data.POMAgentState;
-import com.avaya.sdk.Data.POMAgentStatus;
 import com.avaya.sdk.Data.POMAttribute;
 import com.avaya.sdk.Data.POMCallState;
 import com.avaya.sdk.Data.POMCallbackDest;
@@ -22,7 +23,6 @@ import com.avaya.sdk.Data.POMCallbackType;
 import com.avaya.sdk.Data.POMCapabilities;
 import com.avaya.sdk.Data.POMCompletionCode;
 import com.avaya.sdk.Data.POMContact;
-import com.avaya.sdk.Data.POMContactNumber;
 import com.avaya.sdk.Data.POMContextStoreData;
 import com.avaya.sdk.Data.POMCustomerDetails;
 import com.avaya.sdk.Data.POMDestination;
@@ -40,17 +40,11 @@ public class SDKWorker implements POMAgentHandlerInterface {
     
     private Session socketSession;
     
-    private String sessionID;
+    private AgentSession agentSession;
     
     private POMCompletionCode POMCompletionCode;
     
-    private POMContactNumber POMContactNumber;
-    
-    private boolean isPreview = false;
-    
     private POMAgent pomAgtObj;
-    
-    private POMAgentStatus agtStatus;
     
     private String agentId;
     
@@ -91,9 +85,17 @@ public class SDKWorker implements POMAgentHandlerInterface {
         return POMCompletionCode;
     }
     
+    public AgentSession getAgentSession() {
+        return agentSession;
+    }
+
+    public void setAgentSession(AgentSession agentSession) {
+        this.agentSession = agentSession;
+    }
+
     @Override
     public void AGTSetCustomerDetailRESP(String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTSetCustomerDetailRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTSetCustomerDetailRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "AGTSetCustomerDetailRESP");
@@ -101,66 +103,66 @@ public class SDKWorker implements POMAgentHandlerInterface {
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTBlendToInboundRESP(int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTBlendToInboundRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTBlendToInboundRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "AGTBlendToInboundRESP");
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTBlendToOutboundRESP(int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTBlendToOutboundRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTBlendToOutboundRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "AGTBlendToOutboundRESP");
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTNailupAgentRESP(int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTNailupAgentRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTNailupAgentRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "AGTNailupAgentRESP");
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTReadyForNailupRESP(int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTReadyForNailupRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTReadyForNailupRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "AGTReadyForNailupRESP");
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTLostNailingRESP(POMWrapupDetails wrapupDetails, String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTLostNailingRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTLostNailingRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "AGTLostNailingRESP");
@@ -169,39 +171,39 @@ public class SDKWorker implements POMAgentHandlerInterface {
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTPendingLogoutRESP(int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTPendingLogoutRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTPendingLogoutRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "AGTPendingLogoutRESP");
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void GetAgentStatusResponseRESP(int result) throws Exception {
-        logger.info("[POM => AGENT] Method::GetAgentStatusResponseRESP Invoked.");
+        logger.info("[POM => API  ] Method::GetAgentStatusResponseRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "GetAgentStatusResponseRESP");
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTAddAgentNoteRESP(String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTAddAgentNoteRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTAddAgentNoteRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "AGTAddAgentNoteRESP");
@@ -209,13 +211,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTRefreshAgentNotesRESP(String[] agentNotes, String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTRefreshAgentNotesRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTRefreshAgentNotesRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "AGTRefreshAgentNotesRESP");
@@ -223,13 +225,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTGetTimezonesRESP(POMKeyValuePair[] timezones, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTGetTimezonesRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTGetTimezonesRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "AGTGetTimezonesRESP");
@@ -237,40 +239,40 @@ public class SDKWorker implements POMAgentHandlerInterface {
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTAvailableForNailupRESP(int result) throws Exception {
         
-        logger.info("[POM => AGENT] Method::AGTAvailableForNailupRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTAvailableForNailupRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "AGTAvailableForNailupRESP");
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTAgentDisconnectedRESP(int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTAgentDisconnectedRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTAgentDisconnectedRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "AGTAgentDisconnectedRESP");
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTAddToDNCRESP(String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTAddToDNCRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTAddToDNCRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "AGTAddToDNCRESP");
@@ -278,54 +280,54 @@ public class SDKWorker implements POMAgentHandlerInterface {
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AgentSDKConnectedRESP(HashMap<String, PAMSocketInfo> zoneIPMap) throws Exception {
         
-        logger.info("[POM => AGENT] Method::AgentSDKConnectedRESP Invoked.");
+        logger.info("[POM => API  ] Method::AgentSDKConnectedRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AgentSDKConnectedRESP");
         resp.put("zoneIPMap", zoneIPMap);
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void GetPAMForZoneRESP(HashMap<String, PAMSocketInfo> zoneIPMap) throws Exception {
-        logger.info("[POM => AGENT] Method::GetPAMForZoneRESP Invoked.");
+        logger.info("[POM => API  ] Method::GetPAMForZoneRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "GetPAMForZoneRESP");
         resp.put("zoneIPMap", zoneIPMap);
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void GetAgentStatus(String agentID) throws Exception {
         
-        logger.info("[POM => AGENT] Method::GetAgentStatus Invoked.");
+        logger.info("[POM => API  ] Method::GetAgentStatus Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "GetAgentStatus");
         resp.put("agentID", agentID);
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTGetZoneListRESP(String[] zoneList, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTGetZoneListRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTGetZoneListRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", result);
         resp.put("METHOD", "AGTGetZoneListRESP");
@@ -333,13 +335,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTIsInDNCRESP(boolean present, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTIsInDNCRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTIsInDNCRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", result);
         resp.put("METHOD", "AGTIsInDNCRESP");
@@ -347,33 +349,33 @@ public class SDKWorker implements POMAgentHandlerInterface {
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTSaveAgentForHARESP(int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTSaveAgentForHARESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTSaveAgentForHARESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", result);
         resp.put("METHOD", "AGTSaveAgentForHARESP");
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTSkillsChangedRESP(int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTSkillsChangedRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTSkillsChangedRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", result);
         resp.put("METHOD", "AGTSkillsChangedRESP");
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
@@ -381,7 +383,7 @@ public class SDKWorker implements POMAgentHandlerInterface {
     public void AGTGetContactAttributesRESP(POMAttribute[] pomContactAttributes, String sessionID, int result)
             throws Exception {
         
-        logger.info("[POM => AGENT] Method::AGTGetContactAttributesRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTGetContactAttributesRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", result);
         resp.put("METHOD", "AGTGetContactAttributesRESP");
@@ -390,26 +392,26 @@ public class SDKWorker implements POMAgentHandlerInterface {
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTStateChangedNotify(POMAgentState agentState) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTStateChangedNotify Invoked.");
+        logger.info("[POM => API  ] Method::AGTStateChangedNotify Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTStateChangedNotify");
         resp.put("agentState", agentState);
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTCallNotify(POMContact contact, String sessionID) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTCallNotify Invoked.");
+        logger.info("[POM => API  ] Method::AGTCallNotify Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTCallNotify");
         resp.put("sessionID", sessionID);
@@ -417,14 +419,14 @@ public class SDKWorker implements POMAgentHandlerInterface {
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTAutoReleaseLine(POMWrapupDetails wrapupDetails, String sessionID) throws Exception {
         
-        logger.info("[POM => AGENT] Method::AGTAutoReleaseLine Invoked.");
+        logger.info("[POM => API  ] Method::AGTAutoReleaseLine Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTAutoReleaseLine");
         resp.put("sessionID", sessionID);
@@ -432,13 +434,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTConsultNotify(POMContact contact, String requestingAgentId, String sessionID) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTConsultNotify Invoked.");
+        logger.info("[POM => API  ] Method::AGTConsultNotify Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTConsultNotify");
         resp.put("sessionID", sessionID);
@@ -447,13 +449,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTConsultCancelled(String requestingAgentID, String sessionID) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTConsultCancelled Invoked.");
+        logger.info("[POM => API  ] Method::AGTConsultCancelled Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTConsultCancelled");
         resp.put("sessionID", sessionID);
@@ -461,13 +463,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTTransferNotify(POMContact contact, String sessionID) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTTransferNotify Invoked.");
+        logger.info("[POM => API  ] Method::AGTTransferNotify Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTTransferNotify");
         resp.put("sessionID", sessionID);
@@ -475,13 +477,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTConferenceNotify(POMContact pomContact, String sessionID) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTConferenceNotify Invoked.");
+        logger.info("[POM => API  ] Method::AGTConferenceNotify Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTConferenceNotify");
         resp.put("sessionID", sessionID);
@@ -489,27 +491,27 @@ public class SDKWorker implements POMAgentHandlerInterface {
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTConferenceEnded(String sessionID) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTConferenceEnded Invoked.");
+        logger.info("[POM => API  ] Method::AGTConferenceEnded Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTConferenceEnded");
         resp.put("sessionID", sessionID);
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
         
     }
     
     @Override
     public void AGTConferenceOwnershipChanged(POMContact pomContact, String sessionID) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTConferenceOwnershipChanged Invoked.");
+        logger.info("[POM => API  ] Method::AGTConferenceOwnershipChanged Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTConferenceOwnershipChanged");
         resp.put("sessionID", sessionID);
@@ -517,13 +519,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
     }
     
     @Override
     public void AGTCapabilitiesChanged(POMCapabilities capabilities) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTCapabilitiesChanged Invoked.");
+        logger.info("[POM => API  ] Method::AGTCapabilitiesChanged Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTCapabilitiesChanged");
         resp.put("capabilities", capabilities);
@@ -531,13 +533,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTNailupChange(POMNailupStatus nailupStatus) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTNailupChange Invoked.");
+        logger.info("[POM => API  ] Method::AGTNailupChange Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTNailupChange");
         resp.put("nailupStatus", nailupStatus);
@@ -545,12 +547,12 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
     }
     
     @Override
     public void AGTCallStateChangedNotify(POMCallState callState) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTCallStateChangedNotify Invoked.");
+        logger.info("[POM => API  ] Method::AGTCallStateChangedNotify Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTCallStateChangedNotify");
         resp.put("callState", callState);
@@ -558,14 +560,14 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTDialFailed(POMWrapupDetails wrapupDetails, POMDialFailReason dialFailReason, String sessionID)
             throws Exception {
-        logger.info("[POM => AGENT] Method::AGTDialFailed Invoked.");
+        logger.info("[POM => API  ] Method::AGTDialFailed Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTDialFailed");
         resp.put("wrapupDetails", wrapupDetails);
@@ -575,13 +577,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTConsultDialFailed(POMDialFailReason dialFailReason, String sessionID) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTConsultDialFailed Invoked.");
+        logger.info("[POM => API  ] Method::AGTConsultDialFailed Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTConsultDialFailed");
         resp.put("dialFailReason", dialFailReason);
@@ -590,14 +592,14 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTConsultPending(String requestingAgent, String requestingAgentID, String requestingCampaign,
             String sessionID) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTConsultDialFailed Invoked.");
+        logger.info("[POM => API  ] Method::AGTConsultDialFailed Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTConsultDialFailed");
         resp.put("requestingAgent", requestingAgent);
@@ -608,13 +610,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTPendingConsultComplete(String sessionID) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTPendingConsultComplete Invoked.");
+        logger.info("[POM => API  ] Method::AGTPendingConsultComplete Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTPendingConsultComplete");
         resp.put("sessionID", sessionID);
@@ -622,42 +624,41 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void POMAvailable() throws Exception {
         
-        logger.info("[POM => AGENT] Method::POMAvailable Invoked.");
+        logger.info("[POM => API  ] Method::POMAvailable Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "POMAvailable");
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void POMNotAvailable() throws Exception {
         
-        logger.info("[POM => AGENT] Method::POMNotAvailable Invoked.");
+        logger.info("[POM => API  ] Method::POMNotAvailable Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "POMNotAvailable");
-        resp.put("sessionID", sessionID);
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTPreviewCallbackPending(String dueTime, String sessionID) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTPreviewCallbackPending Invoked.");
+        logger.info("[POM => API  ] Method::AGTPreviewCallbackPending Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTPreviewCallbackPending");
         resp.put("sessionID", sessionID);
@@ -666,13 +667,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTPreviewCallbackCancelled(String sessionID) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTPreviewCallbackCancelled Invoked.");
+        logger.info("[POM => API  ] Method::AGTPreviewCallbackCancelled Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTPreviewCallbackCancelled");
         resp.put("sessionID", sessionID);
@@ -680,13 +681,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTEnableCancelConsult(String sessionID) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTEnableCancelConsult Invoked.");
+        logger.info("[POM => API  ] Method::AGTEnableCancelConsult Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTEnableCancelConsult");
         resp.put("sessionID", sessionID);
@@ -694,13 +695,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTInvalidCommandName(String commandName) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTInvalidCommandName Invoked.");
+        logger.info("[POM => API  ] Method::AGTInvalidCommandName Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTInvalidCommandName");
         resp.put("commandName", commandName);
@@ -708,13 +709,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTCustomerDetailsChanged(POMAttribute detail, String sessionID) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTCustomerDetailsChanged Invoked.");
+        logger.info("[POM => API  ] Method::AGTCustomerDetailsChanged Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTCustomerDetailsChanged");
         resp.put("detail", detail);
@@ -723,39 +724,39 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTBlendedToInbound() throws Exception {
-        logger.info("[POM => AGENT] Method::AGTBlendedToInbound Invoked.");
+        logger.info("[POM => API  ] Method::AGTBlendedToInbound Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTBlendedToInbound");
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTBlendedToOutbound() throws Exception {
-        logger.info("[POM => AGENT] Method::AGTBlendedToInbound Invoked.");
+        logger.info("[POM => API  ] Method::AGTBlendedToInbound Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTBlendedToInbound");
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTZoneDown(String zoneName, int gracePeriodInMins) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTZoneDown Invoked.");
+        logger.info("[POM => API  ] Method::AGTZoneDown Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTZoneDown");
         resp.put("zoneName", zoneName);
@@ -764,13 +765,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTJobAttached(String campaignName) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTJobAttached Invoked.");
+        logger.info("[POM => API  ] Method::AGTJobAttached Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTJobAttached");
         resp.put("campaignName", campaignName);
@@ -778,13 +779,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTGetErrorInfoRESP(POMErrorInfo errorInfo, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTGetErrorInfoRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTGetErrorInfoRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", result);
         resp.put("METHOD", "AGTGetErrorInfoRESP");
@@ -793,14 +794,14 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTDialFailedErrorInfo(POMWrapupDetails wrapupDetails, POMErrorInfo failErrorInfo, String sessionID)
             throws Exception {
-        logger.info("[POM => AGENT] Method::AGTDialFailedErrorInfo Invoked.");
+        logger.info("[POM => API  ] Method::AGTDialFailedErrorInfo Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("sessionID", sessionID);
         resp.put("METHOD", "AGTDialFailedErrorInfo");
@@ -810,13 +811,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTConsultDialFailedErrorInfo(POMErrorInfo failErrorInfo, String sessionID) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTConsultDialFailedErrorInfo Invoked.");
+        logger.info("[POM => API  ] Method::AGTConsultDialFailedErrorInfo Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("sessionID", sessionID);
         resp.put("METHOD", "AGTConsultDialFailedErrorInfo");
@@ -825,15 +826,14 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTSessionIDChange(String oldSessionID, String newSessionID) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTSessionIDChange Invoked.");
+        logger.info("[POM => API  ] Method::AGTSessionIDChange Invoked.");
         Map<String, Object> resp = new HashMap<>();
-        resp.put("sessionID", sessionID);
         resp.put("METHOD", "AGTSessionIDChange");
         resp.put("oldSessionID", oldSessionID);
         resp.put("newSessionID", newSessionID);
@@ -841,21 +841,28 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTLogonRESP(int result) throws Exception {
         
-        logger.info("[POM => AGENT] Method::AGTLogonRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTLogonRESP Invoked.");
+        if (result == 0) {
+            logger.info("[SDK Worker] Agent ID = [" + this.agentSession.getAgentID() + "] saved to Session manager");
+            AgentSessionManager.getInstance().addAgentSession(this.agentSession);    
+        } else {
+            logger.info("[SDK Worker] Agent ID = [" + this.agentSession.getAgentID() + "] Logon Failed");
+        }
+        
         Map<String, String> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "AGTLogonRESP");
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
         MessageObj.sendMessage(this.socketSession, respJson);
     }
@@ -863,8 +870,14 @@ public class SDKWorker implements POMAgentHandlerInterface {
     @Override
     public void AGTLogoffRESP(int result) throws Exception {
         
-        logger.info("[POM => AGENT] Method::AGTLogoffRESP Invoked");
-        
+        logger.info("[POM => API  ] Method::AGTLogoffRESP Invoked");
+        if (result == 0) {
+            logger.info("[SDK Worker] Agent ID = [" + this.agentSession.getAgentID() + "] Logoff successful");
+            logger.info("[SDK Worker] Agent ID = [" + this.agentSession.getAgentID() + "] is removed from Session manager");
+            AgentSessionManager.getInstance().removeAgentSession(this.agentSession);    
+        } else {
+            logger.info("[SDK Worker] Agent ID = [" + this.agentSession.getAgentID() + "] Logoff failed");
+        }
         Map<String, String> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "AGTLogoffRESP");
@@ -872,7 +885,7 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
         
     }
@@ -880,22 +893,21 @@ public class SDKWorker implements POMAgentHandlerInterface {
     @Override
     public void AGTStateChangeRESP(POMAgentState agentState, int result) throws Exception {
         
-        logger.info("[POM => AGENT] Method::AGTStateChangeRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTStateChangeRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", result);
-        resp.put("sessionID", sessionID);
         resp.put("METHOD", "AGTStateChangeRESP");
         resp.put("agentState", agentState);
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
     }
     
     @Override
     public void AGTHoldCallRESP(String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTHoldCallRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTHoldCallRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", result);
         resp.put("sessionID", sessionID);
@@ -904,13 +916,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTUnholdCallRESP(String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTUnholdCallRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTUnholdCallRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", result);
         resp.put("sessionID", sessionID);
@@ -919,14 +931,14 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTReleaseLineRESP(POMWrapupDetails wrapupDetails, String sessionID, int result) throws Exception {
         
-        logger.info("[POM => AGENT] Method::AGTReleaseLineRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTReleaseLineRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", result);
         resp.put("sessionID", sessionID);
@@ -936,7 +948,7 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
@@ -944,7 +956,7 @@ public class SDKWorker implements POMAgentHandlerInterface {
     public void AGTGetCompCodesRESP(POMCompletionCode[] completionCodesList, String sessionID, int result)
             throws Exception {
         
-        logger.info("[POM => AGENT] Method::AGTGetCompCodesRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTGetCompCodesRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", result);
         resp.put("sessionID", sessionID);
@@ -954,13 +966,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTWrapupContactRESP(String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTWrapupContactRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTWrapupContactRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", result);
         resp.put("sessionID", sessionID);
@@ -969,12 +981,12 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
     }
     
     @Override
     public void AGTConsultCallRESP(String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTConsultCallRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTConsultCallRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", result);
         resp.put("sessionID", sessionID);
@@ -983,13 +995,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTCancelConsultRESP(String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTCancelConsultRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTCancelConsultRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", result);
         resp.put("sessionID", sessionID);
@@ -998,13 +1010,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
     }
     
     @Override
     public void AGTGetConsultTypesRESP(POMDestinationType[] destinationTypes, boolean allowFreeForm, String sessionID,
             int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTGetConsultTypesRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTGetConsultTypesRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", result);
         resp.put("sessionID", sessionID);
@@ -1015,14 +1027,14 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTGetConsultDestsForTypeRESP(POMDestinationType type, POMDestination[] destinations, String sessionID,
             int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTGetConsultDestsForTypeRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTGetConsultDestsForTypeRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTGetConsultDestsForTypeRESP");
         resp.put("result", result);
@@ -1033,13 +1045,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
     }
     
     @Override
     public void AGTCompleteTransferRESP(boolean canDispose, POMWrapupDetails wrapupDetails, String sessionID,
             int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTGetConsultDestsForTypeRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTGetConsultDestsForTypeRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTGetConsultDestsForTypeRESP");
         resp.put("result", result);
@@ -1050,13 +1062,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTStartConfRESP(String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTStartConfRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTStartConfRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTStartConfRESP");
         resp.put("result", result);
@@ -1065,13 +1077,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTEndConfRESP(String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTEndConfRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTEndConfRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTEndConfRESP");
         resp.put("result", result);
@@ -1080,13 +1092,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTConfChangeOwnershipRESP(String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTConfChangeOwnershipRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTConfChangeOwnershipRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTConfChangeOwnershipRESP");
         resp.put("result", result);
@@ -1095,13 +1107,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTExtendWrapupRESP(POMWrapupDetails wrapupDetails, String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTExtendWrapupRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTExtendWrapupRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTExtendWrapupRESP");
         resp.put("result", result);
@@ -1111,13 +1123,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTRedialRESP(String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTRedialRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTRedialRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTRedialRESP");
         resp.put("result", result);
@@ -1126,13 +1138,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTSendDTMFRESP(String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTSendDTMFRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTSendDTMFRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTSendDTMFRESP");
         resp.put("result", result);
@@ -1141,14 +1153,14 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTGetCallbackTypesRESP(POMCallbackType[] callbackTypes, String defaultExpiryTime, String sessionID,
             int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTGetCallbackTypesRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTGetCallbackTypesRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTGetCallbackTypesRESP");
         resp.put("result", result);
@@ -1159,14 +1171,14 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTGetCallbackDestsForTypeRESP(POMCallbackType type, POMCallbackDest[] callbackDests, String sessionID,
             int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTGetCallbackDestsForTypeRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTGetCallbackDestsForTypeRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTGetCallbackDestsForTypeRESP");
         resp.put("result", result);
@@ -1177,13 +1189,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTCreateCallbackRESP(String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTCreateCallbackRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTCreateCallbackRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTCreateCallbackRESP");
         resp.put("result", result);
@@ -1192,13 +1204,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTGetErrorStringRESP(String errorMsg, String localizedErrorMsg, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTGetErrorStringRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTGetErrorStringRESP Invoked.");
         
         Map<String, String> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
@@ -1208,7 +1220,7 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         MessageObj.sendMessage(this.socketSession, respJson);
         
     }
@@ -1216,7 +1228,7 @@ public class SDKWorker implements POMAgentHandlerInterface {
     @Override
     public void AGTPreviewDialRESP(String sessionID, int result) throws Exception {
         
-        logger.info("[POM => AGENT] Method::AGTPreviewDialRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTPreviewDialRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTPreviewDialRESP");
         resp.put("result", result);
@@ -1225,13 +1237,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTPreviewCancelRESP(POMWrapupDetails wrapupDetails, String sessionID, int result) throws Exception {
-        logger.info("[POM => AGENT] Method::AGTPreviewDialRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTPreviewDialRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTPreviewDialRESP");
         resp.put("result", result);
@@ -1241,13 +1253,13 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
     }
     
     @Override
     public void AGTGetCustomerDetailsRESP(POMCustomerDetails customerDetails, String sessionID, int result)
             throws Exception {
-        logger.info("[POM => AGENT] Method::AGTGetCustomerDetailsRESP Invoked.");
+        logger.info("[POM => API  ] Method::AGTGetCustomerDetailsRESP Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTGetCustomerDetailsRESP");
         resp.put("result", result);
@@ -1257,20 +1269,20 @@ public class SDKWorker implements POMAgentHandlerInterface {
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
     @Override
     public void AGTAgentLoggedOut() throws Exception {
-        logger.info("[POM => AGENT] Method::AGTAgentLoggedOut Invoked.");
+        logger.info("[POM => API  ] Method::AGTAgentLoggedOut Invoked.");
         Map<String, Object> resp = new HashMap<>();
         resp.put("METHOD", "AGTAgentLoggedOut");
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
         MessageObj.sendMessage(this.socketSession, respJson);
-        logger.info("Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
+        logger.info("[API => AGENT] Send Message to session id= [" + this.socketSession.getId() + "], RESP= " + respJson);
         
     }
     
@@ -1279,9 +1291,6 @@ public class SDKWorker implements POMAgentHandlerInterface {
         // TODO
     }
     
-    public String getSessionID() {
-        return sessionID;
-    }
     
     public static void main(String args[]) throws Exception {
         Map<String, Object> resp = new HashMap<>();

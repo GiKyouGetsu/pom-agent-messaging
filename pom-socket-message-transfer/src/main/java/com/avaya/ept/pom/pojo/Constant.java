@@ -60,4 +60,9 @@ public class Constant {
 	public static String EVENT_ON_CONSULTATIONRECONECT_ERROR = "OnConsultationReconnectError";
 	
 	public static String EVENT_ON_SENDDTMF_ERROR = "OnSendDtmfError";
+	
+	public static void main(String args[]) {
+	    System.out.println(POMCommand.values().length);
+	    POMCommand.AGTLogon.toString();
+	}
 }

@@ -7,10 +7,9 @@ pom:
     address: 10.135.9.45
     port: 9970
   cert:
-    path: wei
-    password: changedit
+    path: config/wei
+    password: changeit
     
 ## log config ##
 logging:
   config: config/logback-spring.xml
-

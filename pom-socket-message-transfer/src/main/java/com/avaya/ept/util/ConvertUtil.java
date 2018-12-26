@@ -34,7 +34,8 @@ public class ConvertUtil {
             HashMap<String, String> paraMap = new HashMap<String, String>();
             String paramerName;
             String paramerValue;
-            for (int i = 0; i < requestParams.length(); i++) {
+            int len = requestParams.length();
+            for (int i = 0; i < len; i++) {
                 JSONObject action = (JSONObject) requestParams.get(i);
                 paramerName = (String) action.get("name");
                 logger.info("*** REQUEST paramerName" + ": " + paramerName);
