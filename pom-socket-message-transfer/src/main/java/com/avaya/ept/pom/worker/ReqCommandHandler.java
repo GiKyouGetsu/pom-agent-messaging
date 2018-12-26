@@ -1,10 +1,10 @@
 package com.avaya.ept.pom.worker;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import javax.enterprise.inject.New;
 import javax.websocket.Session;
 
 import org.apache.logging.log4j.LogManager;
@@ -13,18 +13,23 @@ import org.apache.logging.log4j.Logger;
 import com.avaya.ept.pom.agent.AgentSession;
 import com.avaya.ept.pom.agent.AgentSessionManager;
 import com.avaya.ept.pom.pojo.MessageObj;
+import com.avaya.sdk.PAMSocketInfo;
 import com.avaya.sdk.POMAgentFactory;
 import com.avaya.sdk.Agent.POMAgent;
 import com.avaya.sdk.Data.POMAgentState;
 import com.avaya.sdk.Data.POMAttribute;
 import com.avaya.sdk.Data.POMCallbackDest;
 import com.avaya.sdk.Data.POMCallbackType;
+import com.avaya.sdk.Data.POMCapabilities;
 import com.avaya.sdk.Data.POMCompletionCode;
+import com.avaya.sdk.Data.POMContact;
 import com.avaya.sdk.Data.POMContactNumber;
 import com.avaya.sdk.Data.POMDestination;
 import com.avaya.sdk.Data.POMDestinationType;
 import com.avaya.sdk.Data.POMErrorCode;
+import com.avaya.sdk.Data.POMErrorInfo;
 import com.avaya.sdk.Data.POMKeyValuePair;
+import com.avaya.sdk.Data.POMWrapupDetails;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -796,17 +801,17 @@ public class ReqCommandHandler {
     }
     
     public void logffAllAgent() {
-        logger.info("Server is Error, Forced to logout All agent");
+        logger.info("Server is Error, Forced to disconnected All agents");
         
         Iterator<Entry<String, AgentSession>> iter = AgentSessionManager.getInstance().getagentSessionMap().entrySet().iterator(); 
         while (iter.hasNext()) {
             Entry<String, AgentSession> entry = (Entry<String, AgentSession>) iter.next(); 
             AgentSession agentSession = entry.getValue();
             try {
-                agentSession.getAgentWorker().getPomAgtObj().AGTLogoff();
-                logger.info("Logoff agent = [" + agentSession.getAgentID() + "] ");
+                agentSession.getAgentWorker().getPomAgtObj().AGTAgentDisconnected();
+                logger.info("Disconnected agent = [" + agentSession.getAgentID() + "] ");
             } catch (Exception e) {
-                logger.error("Logoff agent = [" + agentSession.getAgentID() + "] error");
+                logger.error("Disconnected agent = [" + agentSession.getAgentID() + "] error");
                 logger.error(e);
             }
         } 
@@ -833,13 +838,33 @@ public class ReqCommandHandler {
             System.out.println("AGTCreateCallback::POMContactNumber" + objectMapper.writeValueAsString(new POMContactNumber()));
             System.out.println("AGTGetErrorInfo::POMErrorCode" + objectMapper.writeValueAsString(new POMErrorCode()));
             System.out.println("AGTSetCustomerDetail::POMKeyValuePair" + objectMapper.writeValueAsString(new POMKeyValuePair()));
-            System.out.println("AGTAddToDNC::POMAttribute【】" + objectMapper.writeValueAsString(new POMAttribute()));
+            System.out.println("AGTAddToDNC::POMAttribute[]" + objectMapper.writeValueAsString(new POMAttribute()));
+            
+            System.out.println("********************************** Response ********************************");
+            System.out.println("AGTLostNailingRESP::POMWrapupDetails" + objectMapper.writeValueAsString(new POMWrapupDetails()));
+            System.out.println("AGTGetTimezonesRESP::POMKeyValuePair[]" + objectMapper.writeValueAsString(new POMKeyValuePair()));
+            
+            System.out.println("AgentSDKConnectedRESP::HashMap<String, PAMSocketInfo>" + objectMapper.writeValueAsString(new HashMap<String,PAMSocketInfo>()));
+            System.out.println("GetPAMForZoneRESP::HashMap<String, PAMSocketInfo>" + objectMapper.writeValueAsString(new HashMap<String,PAMSocketInfo>()));
+            System.out.println("AGTGetContactAttributesRESP::POMAttribute" + objectMapper.writeValueAsString(new POMAttribute()));
+            
+            System.out.println("AGTCallNotify::POMContact" + objectMapper.writeValueAsString(new POMContact()));
+            
+            System.out.println("AGTCapabilitiesChanged::POMCapabilities" + objectMapper.writeValueAsString(new POMCapabilities()));
+            
+            System.out.println("AGTCustomerDetailsChanged::POMAttribute" + objectMapper.writeValueAsString(new POMAttribute()));
+            
+            System.out.println("AGTGetErrorInfoRESP::POMErrorInfo" + objectMapper.writeValueAsString(new POMErrorInfo()));
+            
+            System.out.println("AGTGetCompCodesRESP::POMCompletionCode" + objectMapper.writeValueAsString(new POMCompletionCode()));
+            
+            System.out.println("AGTGetCallbackDestsForTypeRESP::POMCallbackType【】" + objectMapper.writeValueAsString(new POMCallbackDest()));
             
             
             
-//            POMContactNumber contactNumber3 = objectMapper.readValue(jsonString,  POMContactNumber.class);
-//            System.out.println(contactNumber.getNumber());
-//            System.out.println(contactNumber3.getNumber());
+            
+            
+            
         } catch (JsonParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

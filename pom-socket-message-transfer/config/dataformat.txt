@@ -53,6 +53,31 @@ AGTAddToDNC         ::POMAttribute[]   {"key":"","value":"","attributeType":"REA
 
 
 
+POMContactNumber::{"state":"","wireless":"","name":"name","number":"3642","isDefault":false,"timezone":""}
+POMCompletionCode::{"codeID":"","codeValue":""}
+AGTConsultCall::{"destinationValue":"","destinationType":"Agent","destinationName":"","timeZone":"","presence":"","state":""}
+handleAGTRedial::{"codeID":"","codeValue":""}
+AGTCreateCallback::POMCallbackDest{"callbackTypeSpecified":false,"destinationValue":"","destinationName":"","pomZone":"","timeZone":"","presence":"","state":"","callbackType":"Standard"}
+AGTCreateCallback::POMContactNumber{"state":"","wireless":"","name":"","number":"","isDefault":false,"timezone":""}
+AGTGetErrorInfo::POMErrorCode{"apiName":"","errorCode":""}
+AGTSetCustomerDetail::POMKeyValuePair{"key":"","value":""}
+AGTAddToDNC::POMAttribute[]{"key":"","value":"","attributeType":"READ_ONLY"}
+********************************** Response ********************************
+AGTLostNailingRESP::POMWrapupDetails{"acwMaxTime":0,"acwExtendable":false,"defaultCompCode":null}
+AGTGetTimezonesRESP::POMKeyValuePair[]{"key":"","value":""}
+AgentSDKConnectedRESP::HashMap<String, PAMSocketInfo>{}
+GetPAMForZoneRESP::HashMap<String, PAMSocketInfo>{}
+AGTGetContactAttributesRESP::POMAttribute{"key":"","value":"","attributeType":"READ_ONLY"}
+AGTCallNotify::POMContact{"canReschedule":null,"canRescheduleSpecified":null,"canDial":null,"canDialSpecified":null,"expiryTime":"","canCancelSpecified":null,"canEnterFreeFormNumber":null,"contactCapabilities":null,"timedSpecified":null,"timeoutSpecified":null,"contactNumbers":null,"contactTypeSpecified":null,"scriptFailoverURL":"","contactID":0,"callbackNotes":"","canCancel":null,"contactType":"Preview","scriptURL":"","defaultNumber":"","campaignName":"","skillsetName":"","timed":null,"skillsetID":"","timeout":0,"canEnterFreeFormNumberSpecified":null}
+AGTCapabilitiesChanged::POMCapabilities{"createCallback":false,"leaveConference":false,"changeOwnership":false,"disposition":false,"endConference":false,"transfer":false,"unhold":false,"sendDTMF":false,"updateRecord":false,"record":false,"notReady":false,"conference":false,"originate":false,"ready":false,"hold":false,"release":false,"leaveConsult":false}
+AGTCustomerDetailsChanged::POMAttribute{"key":"","value":"","attributeType":"READ_ONLY"}
+AGTGetErrorInfoRESP::POMErrorInfo{"localizedString":"","apiName":"","errorCode":"","errorType":"Info","errorString":""}
+AGTGetCompCodesRESP::POMCompletionCode{"codeID":"","codeValue":""}
+AGTGetCallbackDestsForTypeRESP::POMCallbackType【】{"callbackTypeSpecified":false,"destinationValue":"","destinationName":"","pomZone":"","timeZone":"","presence":"","state":"","callbackType":"Standard"}
+
+
+
+
 
 
 

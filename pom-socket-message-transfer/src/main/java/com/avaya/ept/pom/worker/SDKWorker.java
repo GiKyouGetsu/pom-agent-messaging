@@ -222,6 +222,7 @@ public class SDKWorker implements POMAgentHandlerInterface {
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "AGTRefreshAgentNotesRESP");
         resp.put("sessionID", sessionID);
+        resp.put("agentNotes", agentNotes);
         
         ObjectMapper objectMapper = new ObjectMapper();
         String respJson = objectMapper.writeValueAsString(resp);
@@ -260,6 +261,14 @@ public class SDKWorker implements POMAgentHandlerInterface {
     @Override
     public void AGTAgentDisconnectedRESP(int result) throws Exception {
         logger.info("[POM => API  ] Method::AGTAgentDisconnectedRESP Invoked.");
+        
+        if (result == 0) {
+            logger.info("[SDK Worker] Agent ID = [" + this.agentSession.getAgentID() + "] Disconnected successful");
+            logger.info("[SDK Worker] Agent ID = [" + this.agentSession.getAgentID() + "] is removed from Session manager");
+            AgentSessionManager.getInstance().removeAgentSession(this.agentSession);
+        } else {
+            logger.info("[SDK Worker] Agent ID = [" + this.agentSession.getAgentID() + "] Disconnected failed");
+        }
         Map<String, Object> resp = new HashMap<>();
         resp.put("result", String.valueOf(result));
         resp.put("METHOD", "AGTAgentDisconnectedRESP");
