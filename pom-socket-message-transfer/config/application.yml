@@ -7,8 +7,8 @@ pom:
     address: 10.135.9.45
     port: 9970
   cert:
-    path: config/wei
-    password: changeit
+    path: config/aaa
+    password: changit
     
 ## log config ##
 logging:

@@ -10,4 +10,3 @@ public class PomSocketMessageTransferApplication {
         SpringApplication.run(PomSocketMessageTransferApplication.class, args);
     }
 }
-

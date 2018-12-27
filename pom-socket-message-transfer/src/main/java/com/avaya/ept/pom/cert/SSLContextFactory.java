@@ -36,6 +36,7 @@ public class SSLContextFactory {
     
     public static SSLContext getSSLContext(String truststore, String password)
     {
+        logger.info("Recieved cert path is: " + truststore);
         FileInputStream stream = null;
         try
         {
