@@ -264,7 +264,7 @@ public class SDKWorker implements POMAgentHandlerInterface {
         
         if (result == 0) {
             logger.info("[SDK Worker] Agent ID = [" + this.agentSession.getAgentID() + "] Disconnected successful");
-            logger.info("[SDK Worker] Agent ID = [" + this.agentSession.getAgentID() + "] is removed from Session manager");
+            logger.info("[SDK Worker] Agent ID = [" + this.agentSession.getAgentID() + "] will be removed from Session manager");
             AgentSessionManager.getInstance().removeAgentSession(this.agentSession);
         } else {
             logger.info("[SDK Worker] Agent ID = [" + this.agentSession.getAgentID() + "] Disconnected failed");

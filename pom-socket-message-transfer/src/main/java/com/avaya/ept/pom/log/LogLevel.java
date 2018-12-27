@@ -1,4 +1,4 @@
-package com.avaya.ept.pom;
+package com.avaya.ept.pom.log;
 
 import org.apache.log4j.Level;
 

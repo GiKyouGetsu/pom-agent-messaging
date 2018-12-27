@@ -1,4 +1,4 @@
-package com.avaya.ept.pom;
+package com.avaya.ept.pom.log;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.util.StringUtils;
 
 public class AgentSessionManager {
     
@@ -38,8 +39,8 @@ public class AgentSessionManager {
         AgentSession agentSession = getAgentSessionBySocketSessionId(socketSessionId);
         if (agentSession != null) {
             if (agentSessionMap.containsKey(agentSession.getSocketSessionId())) {
-                logger.info("get remove session");
                 agentSessionMap.remove(agentSession.getSocketSessionId());
+                logger.info("removeAgentSessionBySocketsessionId():: Successful => Agent ID= [" + agentSession.getAgentID() + "]");
             }
         }
     }
@@ -48,6 +49,7 @@ public class AgentSessionManager {
         if (agentSession != null) {
             if (agentSessionMap.containsKey(agentSession.getSocketSessionId())) {
                 agentSessionMap.remove(agentSession.getSocketSessionId());
+                logger.info("removeAgentSession():: Successful => Agent ID= [" + agentSession.getAgentID() + "]");
             }
         }
     }
@@ -64,20 +66,22 @@ public class AgentSessionManager {
     
     /**
      * @param agentId
-     * @return true is mean agent is already logon
-     * @return false is mean agent is not logon
+     * @return true is mean agent is already logon or agent id is null or empty
+     *         false is mean agent is not logon
      */
     public boolean agentIsLogon(String agentId) {
-        if (agentId != null) {
-            Iterator<Entry<String, AgentSession>> iter = agentSessionMap.entrySet().iterator(); 
-            while (iter.hasNext()) {
-                Entry<String, AgentSession> entry = (Entry<String, AgentSession>) iter.next(); 
-                AgentSession agentSession = entry.getValue();
-                if (agentSession.getAgentID().equals(agentId)) {
-                    return true;
-                } 
-                return false;
-            } 
+        
+        if (StringUtils.isEmpty(agentId)) {
+            return true;
+        }
+        
+        Iterator<Entry<String, AgentSession>> iter = agentSessionMap.entrySet().iterator();
+        while (iter.hasNext()) {
+            Entry<String, AgentSession> entry = (Entry<String, AgentSession>) iter.next();
+            AgentSession agentSession = entry.getValue();
+            if (agentSession.getAgentID().equals(agentId)) {
+                return true;
+            }
         }
         return false;
     }

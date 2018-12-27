@@ -2,8 +2,6 @@ package com.avaya.ept.pom.worker;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
 import javax.websocket.Session;
 
@@ -44,7 +42,7 @@ public class ReqCommandHandler {
     
     public void handleAGTLogon(MessageObj messageObj, Session session) {
         
-        logger.info("Handle AGTLogon command");
+        logger.info("[AGENT => POM]  Command:: AGTLogon command");
         String agentId = messageObj.getParameterMap().get("agentID");
         String agentExt = messageObj.getParameterMap().get("agentExt");
         String pwd = messageObj.getParameterMap().get("pwd");
@@ -54,8 +52,12 @@ public class ReqCommandHandler {
         String zoneName = messageObj.getParameterMap().get("zoneName");
         String orgName = messageObj.getParameterMap().get("orgName");
         
-        SDKWorker worker = new SDKWorker(agentId);
+        if (this.manager.agentIsLogon(agentId)) {
+            logger.info("[AGENT => POM]  Command::AGTLogon Agent ID=[" + agentId + "] has logon or is empty." );
+            return;
+        }
         
+        SDKWorker worker = new SDKWorker(agentId);
         try {
             POMAgent pomAgent = POMAgentFactory.getPOMAgent(agentId, worker);
             worker.setPomAgtObj(pomAgent);
@@ -75,7 +77,6 @@ public class ReqCommandHandler {
             agentSession.setAgentID(agentId);
             worker.setAgentSession(agentSession);
             
-//            this.manager.addAgentSession(agentSession);
         } catch (Exception e) {
             logger.info("AGTLogon error");
             logger.error(e);
@@ -84,13 +85,13 @@ public class ReqCommandHandler {
     
     public void handleAGTLogout(MessageObj messageObj, Session session) {
         
-        logger.info("Handle AGTLogout command");
+        logger.info("[AGENT => POM]  Command:: AGTLogout command");
         
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
             pomAgent.AGTLogoff();
-//            this.manager.removeAgentSession(session.getId());
+            // this.manager.removeAgentSession(session.getId());
             
         } catch (Exception e) {
             logger.info("AGTLogon error");
@@ -102,7 +103,7 @@ public class ReqCommandHandler {
     
     public void handleAGTGetErrorString(MessageObj messageObj, Session session) {
         
-        logger.info("Handle AGTGetErrorString command.");
+        logger.info("[AGENT => POM]  Command:: AGTGetErrorString command.");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -116,7 +117,7 @@ public class ReqCommandHandler {
     
     public void handleAGTStateChange(MessageObj messageObj, Session session) {
         
-        logger.info("Handle AGTStateChange command.");
+        logger.info("[AGENT => POM]  Command:: AGTStateChange command.");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -136,7 +137,7 @@ public class ReqCommandHandler {
     
     public void handleAGTHoldCall(MessageObj messageObj, Session session) {
         
-        logger.info("Handle AGTHoldCall command.");
+        logger.info("[AGENT => POM]  Command:: AGTHoldCall command.");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -153,7 +154,7 @@ public class ReqCommandHandler {
     
     public void handleAGTUnHoldCall(MessageObj messageObj, Session session) {
         
-        logger.info("Handle AGTUnHoldCall command.");
+        logger.info("[AGENT => POM]  Command:: AGTUnHoldCall command.");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -169,7 +170,7 @@ public class ReqCommandHandler {
     
     public void handleAGTReleaseLine(MessageObj messageObj, Session session) {
         
-        logger.info("Handle AGTReleaseLine command.");
+        logger.info("[AGENT => POM]  Command:: AGTReleaseLine command.");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -185,7 +186,7 @@ public class ReqCommandHandler {
     
     public void handleAGTGetCompCodes(MessageObj messageObj, Session session) {
         
-        logger.info("Handle AGTGetCompCodes command.");
+        logger.info("[AGENT => POM]  Command:: AGTGetCompCodes command.");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -201,7 +202,7 @@ public class ReqCommandHandler {
     
     public void handleAGTWrapupContact(MessageObj messageObj, Session session) {
         
-        logger.info("Handle AGTWrapupContact command.");
+        logger.info("[AGENT => POM]  Command:: AGTWrapupContact command.");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -222,7 +223,7 @@ public class ReqCommandHandler {
     
     public void handleAGTExtendWrapup(MessageObj messageObj, Session session) {
         
-        logger.info("Handle AGTExtendWrapup command.");
+        logger.info("[AGENT => POM]  Command:: AGTExtendWrapup command.");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -238,7 +239,7 @@ public class ReqCommandHandler {
     
     public void handleAGTGetConsultTypes(MessageObj messageObj, Session session) {
         
-        logger.info("Handle AGTGetConsultTypes command.");
+        logger.info("[AGENT => POM]  Command:: AGTGetConsultTypes command.");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -254,7 +255,7 @@ public class ReqCommandHandler {
     
     public void handleAGTGetConsultDestsForType(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTGetConsultDestsForType");
+        logger.info("[AGENT => POM]  Command:: AGTGetConsultDestsForType");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -273,7 +274,7 @@ public class ReqCommandHandler {
     
     public void handleAGTConsultCall(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTConsultCall");
+        logger.info("[AGENT => POM]  Command:: AGTConsultCall");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -294,7 +295,7 @@ public class ReqCommandHandler {
     
     public void handleAGTCompleteTransfer(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTCompleteTransfer");
+        logger.info("[AGENT => POM]  Command:: AGTCompleteTransfer");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -310,7 +311,7 @@ public class ReqCommandHandler {
     
     public void handleAGTCancelConsult(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTCancelConsult");
+        logger.info("[AGENT => POM]  Command:: AGTCancelConsult");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -327,7 +328,7 @@ public class ReqCommandHandler {
     
     public void handleAGTStartConf(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTStartConf");
+        logger.info("[AGENT => POM]  Command:: AGTStartConf");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -343,7 +344,7 @@ public class ReqCommandHandler {
     
     public void handleAGTEndConf(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTEndConf");
+        logger.info("[AGENT => POM]  Command:: AGTEndConf");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -359,7 +360,7 @@ public class ReqCommandHandler {
     
     public void handleAGTConfChangeOwnership(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTConfChangeOwnership");
+        logger.info("[AGENT => POM]  Command:: AGTConfChangeOwnership");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -368,14 +369,14 @@ public class ReqCommandHandler {
             pomAgent.AGTConfChangeOwnership(sessionID);
             
         } catch (Exception e) {
-            logger.info("Handle AGTConfChangeOwnership error");
+            logger.info("[AGENT => POM]  Command:: AGTConfChangeOwnership error");
             logger.error(e);
         }
     }
     
     public void handleAGTRedial(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTRedial");
+        logger.info("[AGENT => POM]  Command:: AGTRedial");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -387,14 +388,14 @@ public class ReqCommandHandler {
             pomAgent.AGTRedial(contactNumber);
             
         } catch (Exception e) {
-            logger.info("Handle AGTRedial error");
+            logger.info("[AGENT => POM]  Command:: AGTRedial error");
             logger.error(e);
         }
     }
     
     public void handleAGTSendDTMF(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTSendDTMF");
+        logger.info("[AGENT => POM]  Command:: AGTSendDTMF");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -404,14 +405,14 @@ public class ReqCommandHandler {
             pomAgent.AGTSendDTMF(dtmf, sessionID);
             
         } catch (Exception e) {
-            logger.info("Handle AGTSendDTMF error");
+            logger.info("[AGENT => POM]  Command:: AGTSendDTMF error");
             logger.error(e);
         }
     }
     
     public void handleAGTGetCallbackTypes(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTGetCallbackTypes");
+        logger.info("[AGENT => POM]  Command:: AGTGetCallbackTypes");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -420,14 +421,14 @@ public class ReqCommandHandler {
             pomAgent.AGTGetCallbackTypes(sessionID);
             
         } catch (Exception e) {
-            logger.info("Handle AGTGetCallbackTypes error");
+            logger.info("[AGENT => POM]  Command:: AGTGetCallbackTypes error");
             logger.error(e);
         }
     }
     
     public void handleAGTGetCallbackDestsForType(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTGetCallbackDestsForType");
+        logger.info("[AGENT => POM]  Command:: AGTGetCallbackDestsForType");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -438,14 +439,14 @@ public class ReqCommandHandler {
             pomAgent.AGTGetCallbackDestsForType(callbackType, zoneName, sessionID); // TODO METHOD IS WRONG
             
         } catch (Exception e) {
-            logger.info("Handle AGTGetCallbackDestsForType error");
+            logger.info("[AGENT => POM]  Command:: AGTGetCallbackDestsForType error");
             logger.error(e);
         }
     }
     
     public void handleAGTCreateCallback(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTCreateCallback");
+        logger.info("[AGENT => POM]  Command:: AGTCreateCallback");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -466,14 +467,14 @@ public class ReqCommandHandler {
                     contactNumber, agentNotes, sessionID);
             
         } catch (Exception e) {
-            logger.info("Handle AGTCreateCallback error");
+            logger.info("[AGENT => POM]  Command:: AGTCreateCallback error");
             logger.error(e);
         }
     }
     
     public void handleAGTGetErrorInfo(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTGetErrorInfo");
+        logger.info("[AGENT => POM]  Command:: AGTGetErrorInfo");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -484,14 +485,14 @@ public class ReqCommandHandler {
             pomAgent.AGTGetErrorInfo(errorCode);
             
         } catch (Exception e) {
-            logger.info("Handle AGTGetErrorInfo error");
+            logger.info("[AGENT => POM]  Command:: AGTGetErrorInfo error");
             logger.error(e);
         }
     }
     
     public void handleAGTPreviewDial(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTPreviewDial");
+        logger.info("[AGENT => POM]  Command:: AGTPreviewDial");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -504,14 +505,14 @@ public class ReqCommandHandler {
             pomAgent.AGTPreviewDial(contactNumber, sessionID);
             
         } catch (Exception e) {
-            logger.info("Handle AGTPreviewDial error");
+            logger.info("[AGENT => POM]  Command:: AGTPreviewDial error");
             logger.error(e);
         }
     }
     
     public void handleAGTPreviewCancel(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTPreviewCancel");
+        logger.info("[AGENT => POM]  Command:: AGTPreviewCancel");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -521,14 +522,14 @@ public class ReqCommandHandler {
             pomAgent.AGTPreviewCancel(sessionID);
             
         } catch (Exception e) {
-            logger.info("Handle AGTPreviewCancel error");
+            logger.info("[AGENT => POM]  Command:: AGTPreviewCancel error");
             logger.error(e);
         }
     }
     
     public void handleAGTGetCustomerDetails(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTGetCustomerDetails");
+        logger.info("[AGENT => POM]  Command:: AGTGetCustomerDetails");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -538,14 +539,14 @@ public class ReqCommandHandler {
             pomAgent.AGTGetCustomerDetails(sessionID);
             
         } catch (Exception e) {
-            logger.info("Handle AGTGetCustomerDetails error");
+            logger.info("[AGENT => POM]  Command:: AGTGetCustomerDetails error");
             logger.error(e);
         }
     }
     
     public void handleAGTSetCustomerDetail(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTSetCustomerDetail");
+        logger.info("[AGENT => POM]  Command:: AGTSetCustomerDetail");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -559,98 +560,98 @@ public class ReqCommandHandler {
             pomAgent.AGTSetCustomerDetail(pomKeyValuePair, sessionID);
             
         } catch (Exception e) {
-            logger.info("Handle AGTSetCustomerDetail error");
+            logger.info("[AGENT => POM]  Command:: AGTSetCustomerDetail error");
             logger.error(e);
         }
     }
     
     public void handleAGTBlendToInbound(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTBlendToInbound");
+        logger.info("[AGENT => POM]  Command:: AGTBlendToInbound");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
             pomAgent.AGTBlendToInbound();
             
         } catch (Exception e) {
-            logger.info("Handle AGTBlendToInbound error");
+            logger.info("[AGENT => POM]  Command:: AGTBlendToInbound error");
             logger.error(e);
         }
     }
     
     public void handleAGTBlendToOutbound(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTBlendToOutbound");
+        logger.info("[AGENT => POM]  Command:: AGTBlendToOutbound");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
             pomAgent.AGTBlendToOutbound();
             
         } catch (Exception e) {
-            logger.info("Handle AGTBlendToOutbound error");
+            logger.info("[AGENT => POM]  Command:: AGTBlendToOutbound error");
             logger.error(e);
         }
     }
     
     public void handleAGTNailupAgent(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTNailupAgent");
+        logger.info("[AGENT => POM]  Command:: AGTNailupAgent");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
             pomAgent.AGTNailupAgent();
             
         } catch (Exception e) {
-            logger.info("Handle AGTNailupAgent error");
+            logger.info("[AGENT => POM]  Command:: AGTNailupAgent error");
             logger.error(e);
         }
     }
     
     public void handleAGTReadyForNailup(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTReadyForNailup");
+        logger.info("[AGENT => POM]  Command:: AGTReadyForNailup");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
             pomAgent.AGTReadyForNailup();
             
         } catch (Exception e) {
-            logger.info("Handle AGTReadyForNailup error");
+            logger.info("[AGENT => POM]  Command:: AGTReadyForNailup error");
             logger.error(e);
         }
     }
     
     public void handleAGTLostNailing(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTLostNailing");
+        logger.info("[AGENT => POM]  Command:: AGTLostNailing");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
             pomAgent.AGTLostNailing();
             
         } catch (Exception e) {
-            logger.info("Handle AGTLostNailing error");
+            logger.info("[AGENT => POM]  Command:: AGTLostNailing error");
             logger.error(e);
         }
     }
     
     public void handleAGTPendingLogout(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTPendingLogout");
+        logger.info("[AGENT => POM]  Command:: AGTPendingLogout");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
             pomAgent.AGTPendingLogout();
             
         } catch (Exception e) {
-            logger.info("Handle AGTPendingLogout error");
+            logger.info("[AGENT => POM]  Command:: AGTPendingLogout error");
             logger.error(e);
         }
     }
     
     public void handleAGTAddAgentNote(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTAddAgentNote");
+        logger.info("[AGENT => POM]  Command:: AGTAddAgentNote");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -659,14 +660,14 @@ public class ReqCommandHandler {
             pomAgent.AGTAddAgentNote(agentNote);
             
         } catch (Exception e) {
-            logger.info("Handle AGTAddAgentNote error");
+            logger.info("[AGENT => POM]  Command:: AGTAddAgentNote error");
             logger.error(e);
         }
     }
     
     public void handleAGTRefreshAgentNotes(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTRefreshAgentNotes");
+        logger.info("[AGENT => POM]  Command:: AGTRefreshAgentNotes");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -674,56 +675,56 @@ public class ReqCommandHandler {
             pomAgent.AGTRefreshAgentNotes(); // TODO HAVE NO PARAMETERS
             
         } catch (Exception e) {
-            logger.info("Handle AGTRefreshAgentNotes error");
+            logger.info("[AGENT => POM]  Command:: AGTRefreshAgentNotes error");
             logger.error(e);
         }
     }
     
     public void handleAGTGetTimezones(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTGetTimezones");
+        logger.info("[AGENT => POM]  Command:: AGTGetTimezones");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
             
             pomAgent.AGTGetTimezones();
         } catch (Exception e) {
-            logger.info("Handle AGTGetTimezones error");
+            logger.info("[AGENT => POM]  Command:: AGTGetTimezones error");
             logger.error(e);
         }
     }
     
     public void handleAGTAvailableForNailup(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTAvailableForNailup");
+        logger.info("[AGENT => POM]  Command:: AGTAvailableForNailup");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
             
             pomAgent.AGTAvailableForNailup();
         } catch (Exception e) {
-            logger.info("Handle AGTAvailableForNailup error");
+            logger.info("[AGENT => POM]  Command:: AGTAvailableForNailup error");
             logger.error(e);
         }
     }
     
     public void handleAGTAgentDisconnected(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTAgentDisconnected");
+        logger.info("[AGENT => POM]  Command:: AGTAgentDisconnected");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
             
             pomAgent.AGTAgentDisconnected();
         } catch (Exception e) {
-            logger.info("Handle AGTAgentDisconnected error");
+            logger.info("[AGENT => POM]  Command:: AGTAgentDisconnected error");
             logger.error(e);
         }
     }
     
     public void handleAGTAddToDNC(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTAddToDNC");
+        logger.info("[AGENT => POM]  Command:: AGTAddToDNC");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -735,14 +736,14 @@ public class ReqCommandHandler {
             
             pomAgent.AGTAddToDNC(addressList);
         } catch (Exception e) {
-            logger.info("Handle AGTAddToDNC error");
+            logger.info("[AGENT => POM]  Command:: AGTAddToDNC error");
             logger.error(e);
         }
     }
     
     public void handleAGTIsInDNC(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTIsInDNC");
+        logger.info("[AGENT => POM]  Command:: AGTIsInDNC");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
@@ -752,76 +753,86 @@ public class ReqCommandHandler {
             pomAgent.AGTIsInDNC(addressValue, sessionID);
             
         } catch (Exception e) {
-            logger.info("Handle AGTIsInDNC error");
+            logger.info("[AGENT => POM]  Command:: AGTIsInDNC error");
             logger.error(e);
         }
     }
     
     public void handleAGTGetZoneList(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTGetZoneList");
+        logger.info("[AGENT => POM]  Command:: AGTGetZoneList");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
             pomAgent.AGTGetZoneList();
             
         } catch (Exception e) {
-            logger.info("Handle AGTGetZoneList error");
+            logger.info("[AGENT => POM]  Command:: AGTGetZoneList error");
             logger.error(e);
         }
     }
     
     public void handleAGTGetContactAttributes(MessageObj messageObj, Session session) {
         
-        logger.info("AGT POM Command:: AGTGetContactAttributes");
+        logger.info("[AGENT => POM]  Command:: AGTGetContactAttributes");
         try {
             AgentSession agentSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
             POMAgent pomAgent = agentSession.getAgentWorker().getPomAgtObj();
             pomAgent.AGTGetContactAttributes();
             
         } catch (Exception e) {
-            logger.info("Handle AGTGetContactAttributes error");
+            logger.info("[AGENT => POM]  Command:: AGTGetContactAttributes error");
             logger.error(e);
         }
     }
     
     public void handleException(Session session) {
         logger.info("Session id= [" + session.getId() + "]" + " Exception, Forced to logout this agent");
+        AgentSession aSession = this.manager.getAgentSessionBySocketSessionId(session.getId());
         try {
-            if  (this.manager.getAgentSessionBySocketSessionId(session.getId()).getAgentWorker().getPomAgtObj() != null) {
-                this.manager.getAgentSessionBySocketSessionId(session.getId()).getAgentWorker().getPomAgtObj().AGTAgentDisconnected();
+            if (aSession != null) {
+                logger.info("[AGENT => POM]  Command:: AGTAgentDisconnected");
+                aSession.getAgentWorker().getPomAgtObj().AGTAgentDisconnected();
             }
         } catch (Exception e) {
-            logger.error("Logoff agent = [" 
-                    + this.manager.getAgentSessionBySocketSessionId(session.getId()).getAgentID() 
-                    + "] error");
+            logger.error("Disconnected agent id = [" + aSession.getAgentID() + "] error");
             logger.error(e);
         }
-        
     }
     
     public void logffAllAgent() {
         logger.info("Server is Error, Forced to disconnected All agents");
         
-        Iterator<Entry<String, AgentSession>> iter = AgentSessionManager.getInstance().getagentSessionMap().entrySet().iterator(); 
-        while (iter.hasNext()) {
-            Entry<String, AgentSession> entry = (Entry<String, AgentSession>) iter.next(); 
-            AgentSession agentSession = entry.getValue();
-            try {
-                agentSession.getAgentWorker().getPomAgtObj().AGTAgentDisconnected();
-                logger.info("Disconnected agent = [" + agentSession.getAgentID() + "] ");
-            } catch (Exception e) {
-                logger.error("Disconnected agent = [" + agentSession.getAgentID() + "] error");
-                logger.error(e);
+        // Iterator<Entry<String, AgentSession>> iter =
+        // AgentSessionManager.getInstance().getagentSessionMap().entrySet().iterator();
+        // while (iter.hasNext()) {
+        // Entry<String, AgentSession> entry = (Entry<String, AgentSession>)
+        // iter.next();
+        // AgentSession agentSession = entry.getValue();
+        // try {
+        // agentSession.getAgentWorker().getPomAgtObj().AGTAgentDisconnected();
+        // logger.info("Disconnected agent = [" + agentSession.getAgentID() + "] ");
+        // } catch (Exception e) {
+        // logger.error("Disconnected agent = [" + agentSession.getAgentID() + "]
+        // error");
+        // logger.error(e);
+        // }
+        // }
+        
+        this.manager.getagentSessionMap().forEach((sessionid, agent) -> {
+            if (agent != null) {
+                try {
+                    logger.info("[AGENT => POM]  Command:: AGTAgentDisconnected. AgentId= [" + agent.getAgentID() + "]");
+                    agent.getAgentWorker().getPomAgtObj().AGTAgentDisconnected();
+                } catch (Exception e) {
+                    logger.error("Disconnected agent = [" + agent.getAgentID() + "] error");
+                    logger.error(e);
+                }
             }
-        } 
+        });
     }
     
     public static void main(String a[]) {
-        
-        String jsonString = "{\"state\":\"\",\"wireless\":\"\",\"name\":\"name\",\"number\":\"3642\",\"isDefault\":false,\"timezone\":\"\"}" ;
-        
-        
         
         ObjectMapper objectMapper = new ObjectMapper();
         try {
@@ -834,36 +845,37 @@ public class ReqCommandHandler {
             System.out.println("POMCompletionCode::" + objectMapper.writeValueAsString(new POMCompletionCode()));
             System.out.println("AGTConsultCall::" + objectMapper.writeValueAsString(new POMDestination()));
             System.out.println("handleAGTRedial::" + objectMapper.writeValueAsString(new POMCompletionCode()));
-            System.out.println("AGTCreateCallback::POMCallbackDest" + objectMapper.writeValueAsString(new POMCallbackDest()));
-            System.out.println("AGTCreateCallback::POMContactNumber" + objectMapper.writeValueAsString(new POMContactNumber()));
+            System.out.println(
+                    "AGTCreateCallback::POMCallbackDest" + objectMapper.writeValueAsString(new POMCallbackDest()));
+            System.out.println(
+                    "AGTCreateCallback::POMContactNumber" + objectMapper.writeValueAsString(new POMContactNumber()));
             System.out.println("AGTGetErrorInfo::POMErrorCode" + objectMapper.writeValueAsString(new POMErrorCode()));
-            System.out.println("AGTSetCustomerDetail::POMKeyValuePair" + objectMapper.writeValueAsString(new POMKeyValuePair()));
+            System.out.println(
+                    "AGTSetCustomerDetail::POMKeyValuePair" + objectMapper.writeValueAsString(new POMKeyValuePair()));
             System.out.println("AGTAddToDNC::POMAttribute[]" + objectMapper.writeValueAsString(new POMAttribute()));
             
             System.out.println("********************************** Response ********************************");
-            System.out.println("AGTLostNailingRESP::POMWrapupDetails" + objectMapper.writeValueAsString(new POMWrapupDetails()));
-            System.out.println("AGTGetTimezonesRESP::POMKeyValuePair[]" + objectMapper.writeValueAsString(new POMKeyValuePair()));
-            
-            System.out.println("AgentSDKConnectedRESP::HashMap<String, PAMSocketInfo>" + objectMapper.writeValueAsString(new HashMap<String,PAMSocketInfo>()));
-            System.out.println("GetPAMForZoneRESP::HashMap<String, PAMSocketInfo>" + objectMapper.writeValueAsString(new HashMap<String,PAMSocketInfo>()));
-            System.out.println("AGTGetContactAttributesRESP::POMAttribute" + objectMapper.writeValueAsString(new POMAttribute()));
-            
+            System.out.println(
+                    "AGTLostNailingRESP::POMWrapupDetails" + objectMapper.writeValueAsString(new POMWrapupDetails()));
+            System.out.println(
+                    "AGTGetTimezonesRESP::POMKeyValuePair[]" + objectMapper.writeValueAsString(new POMKeyValuePair()));
+            System.out.println("AgentSDKConnectedRESP::HashMap<String, PAMSocketInfo>"
+                    + objectMapper.writeValueAsString(new HashMap<String, PAMSocketInfo>()));
+            System.out.println("GetPAMForZoneRESP::HashMap<String, PAMSocketInfo>"
+                    + objectMapper.writeValueAsString(new HashMap<String, PAMSocketInfo>()));
+            System.out.println(
+                    "AGTGetContactAttributesRESP::POMAttribute" + objectMapper.writeValueAsString(new POMAttribute()));
             System.out.println("AGTCallNotify::POMContact" + objectMapper.writeValueAsString(new POMContact()));
-            
-            System.out.println("AGTCapabilitiesChanged::POMCapabilities" + objectMapper.writeValueAsString(new POMCapabilities()));
-            
-            System.out.println("AGTCustomerDetailsChanged::POMAttribute" + objectMapper.writeValueAsString(new POMAttribute()));
-            
-            System.out.println("AGTGetErrorInfoRESP::POMErrorInfo" + objectMapper.writeValueAsString(new POMErrorInfo()));
-            
-            System.out.println("AGTGetCompCodesRESP::POMCompletionCode" + objectMapper.writeValueAsString(new POMCompletionCode()));
-            
-            System.out.println("AGTGetCallbackDestsForTypeRESP::POMCallbackType【】" + objectMapper.writeValueAsString(new POMCallbackDest()));
-            
-            
-            
-            
-            
+            System.out.println(
+                    "AGTCapabilitiesChanged::POMCapabilities" + objectMapper.writeValueAsString(new POMCapabilities()));
+            System.out.println(
+                    "AGTCustomerDetailsChanged::POMAttribute" + objectMapper.writeValueAsString(new POMAttribute()));
+            System.out
+                    .println("AGTGetErrorInfoRESP::POMErrorInfo" + objectMapper.writeValueAsString(new POMErrorInfo()));
+            System.out.println("AGTGetCompCodesRESP::POMCompletionCode"
+                    + objectMapper.writeValueAsString(new POMCompletionCode()));
+            System.out.println("AGTGetCallbackDestsForTypeRESP::POMCallbackType【】"
+                    + objectMapper.writeValueAsString(new POMCallbackDest()));
             
         } catch (JsonParseException e) {
             // TODO Auto-generated catch block

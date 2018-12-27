@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.avaya.ept.pom.cert.SSLContextFactory;
+import com.avaya.ept.pom.log.ILoggerImpl;
 import com.avaya.sdk.PAMSocketInfo;
 import com.avaya.sdk.POMAgentFactory;
 
